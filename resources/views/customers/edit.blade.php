@@ -14,17 +14,23 @@
             width: 100% !important;
             height: auto;
         }
+        .fa-fw {
+            width: 1.28571429em;
+            text-align: center;
+            float: right;
+            margin: -26px 11px;
+        }
     </style>
     <div class="container">
         <div class="stepwizard">
             <div class="stepwizard-row setup-panel">
                 <div class="stepwizard-step col-xs-3">
                     <a href="#step-1" type="button" class="btn btn-success btn-circle"><i class="circle" aria-hidden="true"></i></a>
-                    <p>General Grant Information</p>
+                    <p> Principal Information</p>
                 </div>
                 <div class="stepwizard-step col-xs-3">
                     <a href="#step-2" type="button" class="btn btn-default btn-circle"><i class="circle" aria-hidden="true"></i></a>
-                    <p>Indemnity</p>
+                    <p>Indemnities</p>
                 </div>
                 <div class="stepwizard-step col-xs-3">
                     <a href="#step-3" type="button" class="btn btn-default btn-circle"><i class="circle" aria-hidden="true"></i></a>
@@ -42,7 +48,7 @@
                 <div class="panel-heading">
                     <hr style="margin-top: 0;">
                     <h6 class="accordion-header mt-0" id="headingFive" style="background-color: #edf7fd;padding:15px">
-                        <strong>General Grant Information </strong>
+                        <strong> Principal Information </strong>
                     </h6>
                 </div>
                 <div class="panel-body">
@@ -50,8 +56,8 @@
                         <div class="card mb-4 mt-2">
                             <div class="card-body">
                                 <div class="row">
-                                    <input type="hidden" class="form-control" placeholder="Name" id="name" name="cust_id" value="{!! $customer->id !!}">
-                                    <input type="hidden" class="form-control" placeholder="Name" id="name" name="user_id" value="{!! $customer->user_id !!}">
+                                    <input type="hidden" class="form-control" placeholder="Name" id="cust_id" name="cust_id" value="{!! $customer->id !!}">
+                                    <input type="hidden" class="form-control" placeholder="Name" id="user_id" name="user_id" value="{!! $customer->user_id !!}">
 
                                     <div class="col-md-4 mb-3">
                                         <label for="name" class="form-label">Account Name <span class="req text-danger">*</span></label>
@@ -59,39 +65,12 @@
                                     </div>
 
                                     <div class="col-md-4 mb-3">
-                                        <label for="corporation_type" class="form-label">Corporation Type <span class="req text-danger">*</span></label>
-                                        <select  placeholder="Select Corporation Type" class="form-select select2selector" id="corporation_type" name="corporation_type">
-                                            <option value="0"> Select Corporation Type</option>
-                                            @foreach(corporation_types() as $key => $position)
-                                                <option value="{{$key}}" @selected($customer->corporation_type == $key)>{{$position}}</option>
-                                            @endforeach
-                                        </select>
+                                        <label for="address" class="form-label">Address <span class="req text-danger">*</span></label>
+                                        <textarea class="form-control" id="address" name="address" placeholder="Address" rows="1">{!! $customer->address !!}</textarea>
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="primary_contact" class="form-label">Primary Contact <span class="req text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="primary_contact" name="primary_contact" value="{!! $customer->primary_contact !!}" placeholder="Primary Contact"/>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label for="phone" class="form-label">Phone <span class="req text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="phone" name="phone" value="{!! $customer->phone !!}" placeholder="Phone"/>
-                                    </div>
-
-                                    <div class="col-md-4 mb-3">
-                                        <label for="email" class="form-label">Email <span class="req text-danger">*</span></label>
-                                        <input type="email" class="form-control" id="email" name="email" value="{!! $customer->user->email !!}" placeholder="Email"/>
-                                    </div>
-
-                                    <div class="col-md-4 mb-3">
-                                        <label for="size" class="form-label">Average Project Size <span class="req text-danger">*</span></label>
-                                        <input type="number" class="form-control" id="size" name="average_size" value="{!! $customer->average_size !!}" placeholder="Average Project Size"/>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label for="largest_size" class="form-label">Largest Project Size <span class="req text-danger">*</span></label>
-                                        <input type="number" class="form-control" id="largest_size" name="largest_size" value="{!! $customer->largest_size !!}" placeholder="Largest Project Size"/>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label for="backlog" class="form-label">Largest Backlog <span class="req text-danger">*</span></label>
-                                        <input type="number" class="form-control" id="backlog" name="backlog" value="{!! $customer->backlog !!}" placeholder="Largest Backlog"/>
+                                        <label for="address2" class="form-label">Address 2<span class="req text-danger">*</span></label>
+                                        <textarea class="form-control" id="address2" name="address2" placeholder="Address 2" rows="1"> {!! $customer->address2 !!} </textarea>
                                     </div>
 
                                     <div class="col-md-4 mb-3">
@@ -117,26 +96,49 @@
 
                                     <div class="col-md-4 mb-3">
                                         <label for="zip" class="form-label">Zip <span class="req text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="zip" name="zip" placeholder="Zip" value="{!! $customer->zip !!}"/>
+                                        <input type="text" class="form-control" id="zip" name="zip" placeholder="Zip" value="{!! $customer->zip !!}" maxlength="5" pattern="\d{5}"/>
                                     </div>
-                                    {{--                                <div class="col-md-4 mb-3">--}}
-                                    {{--                                    <label for="positions" class="form-label">Positions Title*</label>--}}
-                                    {{--                                    <select  placeholder="Select a Position" class="form-select select2selector" id="positions" name="positions">--}}
-                                    {{--                                        <option value="0"> Select a positions</option>--}}
-                                    {{--                                        @foreach(positions() as $key => $position)--}}
-                                    {{--                                            <option value="{{$key}}">{{$position}}</option>--}}
-                                    {{--                                        @endforeach--}}
-                                    {{--                                    </select>--}}
-                                    {{--                                </div>--}}
-                                    {{--                                <div class="col-md-4 mb-3">--}}
-                                    {{--                                    <label for="agent_id" class="form-label">Service Agent Name*</label>--}}
-                                    {{--                                    <select  placeholder="Select a Agent" class="form-select select2selector" id="agent_id" name="agent_id">--}}
-                                    {{--                                        <option value="0"> Select a Agent</option>--}}
-                                    {{--                                        @foreach($agents as $agent)--}}
-                                    {{--                                            <option value="{{$agent->id}}"> {{ $agent->name }} </option>--}}
-                                    {{--                                        @endforeach--}}
-                                    {{--                                    </select>--}}
-                                    {{--                                </div>--}}
+
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="primary_contact" class="form-label">Primary Contact <span class="req text-danger">*</span></label>
+                                        <input type="text" class="form-control phoneNo" id="primary_contact" name="primary_contact" value="{!! $customer->primary_contact !!}"
+                                               maxlength="12" placeholder="000-000-0000" />
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="phone" class="form-label">Phone <span class="req text-danger">*</span></label>
+                                        <input type="text" class="form-control phoneNo" id="phone" name="phone" value="{!! $customer->phone !!}"
+                                               maxlength="12" placeholder="000-000-0000" />
+                                    </div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="email" class="form-label">Email <span class="req text-danger">*</span></label>
+                                        <input type="email" class="form-control" id="email" name="email" value="{!! $customer->user->email !!}" placeholder="Email"/>
+                                    </div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="corporation_type" class="form-label">Corporation Type <span class="req text-danger">*</span></label>
+                                        <select  placeholder="Select Corporation Type" class="form-select select2selector" id="corporation_type" name="corporation_type">
+                                            <option value="0"> Select Corporation Type</option>
+                                            @foreach(corporation_types() as $key => $position)
+                                                <option value="{{$key}}" @selected($customer->corporation_type == $key)>{{$position}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <label for="size" class="form-label">Average Project Size <span class="req text-danger">*</span></label>
+                                        <input type="text" class="form-control monetary" id="size" name="average_size" value="{!! $customer->average_size !!}" placeholder="$0.00"/>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="largest_size" class="form-label">Largest Project Size <span class="req text-danger">*</span></label>
+                                        <input type="text" class="form-control monetary" id="largest_size" name="largest_size" value="{!! $customer->largest_size !!}" placeholder="$0.00"/>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="backlog" class="form-label">Largest Backlog <span class="req text-danger">*</span></label>
+                                        <input type="text" class="form-control monetary" id="backlog" name="backlog" value="{!! $customer->backlog !!}" placeholder="$0.00"/>
+                                    </div>
+
                                     <div class="col-md-4 mb-0 " toggle="password-parent" style="position: relative">
                                         <label class=" control-label">Password <span class="req text-danger">*</span></label>
                                         <input id="password-field" type="password" class="form-control" name="password">
@@ -149,10 +151,7 @@
                                                name="password_confirmation">
                                         <span class="fa fa-fw fa-eye-slash field-icon toggle-password"> </span>
                                     </div>
-                                    <div class="col-md-8 mb-3">
-                                        <label for="address" class="form-label">Address <span class="req text-danger">*</span></label>
-                                        <textarea class="form-control" id="address" name="address" placeholder="Address" rows="1">{!! $customer->address !!}</textarea>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -164,36 +163,25 @@
                 <div class="panel-heading">
                     <hr style="margin-top: 0;">
                     <h6 class="accordion-header mt-0" id="headingFive" style="background-color: #edf7fd;padding:15px">
-                        <strong>Indemnity </strong>
+                        <strong>Indemnities </strong>
                     </h6>
                 </div>
                 <div class="panel-body">
-                    <div class="accordion-body">
-                        <div class="card mb-4 mt-2">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <input id="Personal" type="radio" class="" name="status" value="personal" checked>
-                                        <label for="Personal" class="btn-radio "> Corporate and Personal </label><br>
-                                        <input id="Corporate" type="radio" class=" btn-radio" name="status" value="corporate" >
-                                        <label class="" for="Corporate"> Corporate Only </label>
-                                    </div>
-                                    <div class="row personal hidden">
-                                        <div class="col-12 mt-2 mb-2">
-                                            <label for="personal_indemnitor" class="form-label "> <strong>Personal Indemnitor(s)<span class="req text-danger">*</span></strong></label>
-                                            <textarea name="personal_indemnitor" class="form-control" rows="3">  </textarea>
-                                        </div>
-                                    </div>
-                                    <div class="row corporate hidden">
-                                        <div class="col-12 mt-2 mb-2">
-                                            <label for="corporate_indemnitor" class="form-label "> <strong> Corporate Indemnitor(s)<span class="req text-danger">*</span></strong></label>
-                                            <textarea name="corporate_indemnitor" class="form-control" rows="3">  </textarea>
-                                        </div>
-                                    </div>
+                    <div class="accordion-body mb-5">
+                        @if($customer)
+                            @if(count($customer->indemnitors)>0)
+                                @foreach($customer->indemnitors as $key => $indemnitor)
+                                    <x-append-indemnitor :itemCount="$key" :indemnitor="$indemnitor"/>
+                                @endforeach
+                            @else
+                                <x-append-indemnitor itemCount="1" :indemnitor="0"/>
+                            @endif
+                        @else
+                            <x-append-indemnitor itemCount="1" :indemnitor="0"/>
+                        @endif
+                        <div class="indemnitors_list"></div>
 
-                                </div>
-                            </div>
-                        </div>
+                        <button class="btn btn-success btn-xs " type="button" id="add-indemnitor">+ Add More</button>
                     </div>
                     @include('layouts.stepform.footer',['last' => false])
                 </div>
@@ -247,7 +235,7 @@
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="underwriter_phone" class="form-label">Underwriter Phone<span class="req text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="underwriter_phone" name="underwriter_phone" placeholder="Underwriter Phone" value="{{$authority->surerty->cbu_phone}}"/>
+                                                <input type="text" class="form-control phoneNo" id="underwriter_phone" name="underwriter_phone"  maxlength="12" placeholder="000-000-0000" value="{{$authority->surerty->cbu_phone}}"/>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="underwriter_email" class="form-label">Underwriter Email<span class="req text-danger">*</span></label>
@@ -264,29 +252,7 @@
                     </div>
                 </div>
 
-                <div class="panel-heading">
-                    <h6 class="accordion-header mt-0" id="headingFive" style="background-color: #edf7fd;padding:15px">
-                        <strong>Questions </strong>
-                    </h6>
-                </div>
-                <div class="panel-body">
-                    <div class="accordion-body">
-                        <div class="card mb-4 mt-2 question-row" data-index="{{ $key }}">
-                            <div class="card-body">
-                                <div class="row" id="questions-container">
-                                    @foreach($questions as $key => $item)
-                                        <div class="{{count($questions) > 1 ? "col-md-6" : "col-md-12"}}  questions mb-3" id="question-row-{{ $key }}">
-                                            <label for="questions_{{ $key }}" class="form-label w-100">Question {{ $key+1 }} <i class="fa fa-trash remove-question text-danger float-right"></i></label>
-                                            <input type="text" class="form-control" placeholder="Questions" id="questions_{{ $key }}" name="questions[{{ $key }}]" value="{{ $item->question }}">
-                                            <input type="hidden" name="question_id[{{ $key }}]" value="{{ $item->id }}">
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <button class="btn btn-success btn-xs mt-2" type="button" id="add-question">+ Add More</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
 
 
 
@@ -305,27 +271,15 @@
                         <div class="card mb-4 mt-2">
                             <div class="card-body">
                                 <div class="row">
-                                    <input type="hidden" class="form-control" id="start_date" name="authority_id" value="{{$authority->id}}" />
+                                    <input type="hidden" class="form-control" id="authority_id" name="authority_id" value="{{$authority->id}}" />
 
                                     <div class="col-md-4 mb-3">
                                         <label for="start_date" class="form-label ">Effective Date <span class="req text-danger">*</span> </label>
-                                        <input type="date" class="form-control" id="start_date" name="start_date" value="{{$authority->start_date}}" placeholder="Expiration Date"/>
+                                        <input type="date" class="form-control" id="start_date" name="start_date" value="{{$authority->start_date}}" placeholder="Effective Date"/>
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="exp_date" class="form-label">Expiration Date Date <span class="req text-danger">*</span></label>
+                                        <label for="exp_date" class="form-label">Expiration Date <span class="req text-danger">*</span></label>
                                         <input type="date" class="form-control" id="exp_date" name="exp_date" placeholder="Expiration Date" value="{{$authority->expiry_date}}"/>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-
-                                        <label for="territory" class="form-label">Territory <span class="req text-danger">*</span></label>
-                                        <select name="territory" class="form-select select2selector">
-                                            <option value="0">Select State</option>
-                                            @foreach($provinces as $row)
-                                                <option value="{!! $row->id !!}" @selected($authority->territory == $row->id)>{!! $row->name !!}</option>
-                                            @endforeach
-                                        </select>
-
-                                        {{--                                    <input type="number" class="form-control" id="territory" name="territory" placeholder="Territory"/>--}}
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label class="form-label">Single Project Limit <span class="req text-danger">*</span></label>
@@ -334,13 +288,6 @@
                                     <div class="col-md-4 mb-3">
                                         <label for="number" class="form-label">Aggregate Limit <span class="req text-danger">*</span></label>
                                         <input type="number" class="form-control" id="number" name="aggr_limt" placeholder="Aggregate Limit" value="{{$authority->aggregate_limit}}"/>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label for="design_build" class="form-label">Design Build<span class="req text-danger">*</span></label>
-                                        <select name="design_build" class="form-select select2selector">
-                                            <option value="1" @selected($authority->design_build == 1)>Yes</option>
-                                            <option value="0" @selected($authority->design_build == 0)>No</option>
-                                        </select>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="name" class="form-label">Job Duration (Years) <span class="req text-danger">*</span></label>
@@ -357,10 +304,64 @@
                                             <option value="0" @selected($authority->hazmat == 0) >No</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="name" class="form-label">Bid Spread % <span class="req text-danger">*</span></label>
-                                        <input type="number" class="form-control" placeholder="Minimum Bid" id="name" name="minim_bid" value="{!! $authority->minimum_bid !!}">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="design_build" class="form-label">Design Build<span class="req text-danger">*</span></label>
+                                        <select name="design_build" class="form-select select2selector">
+                                            <option value="1" @selected($authority->design_build == 1)>Yes</option>
+                                            <option value="0" @selected($authority->design_build == 0)>No</option>
+                                        </select>
                                     </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="curtain" class="form-label">Curtain Wall <span class="req text-danger">*</span></label>
+                                        <input type="text" class="form-control" placeholder="Curtain Wall" id="curtain" name="curtain"
+                                               value="{{$customer->curtain}}">
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="glazing" class="form-label">Glazing<span class="req text-danger">*</span></label>
+                                        <input type="text" class="form-control" placeholder="glazing" id="glazing" name="glazing"
+                                               value="{{$customer->glazing}}" >
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="Solar" class="form-label">Solar <span class="req text-danger">*</span></label>
+                                        <input type="text" class="form-control" placeholder="Solar" id="solar" name="solar"
+                                               value="{{$customer->solar}}" >
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="minim_bid" class="form-label">Bid Spread % <span class="req text-danger">*</span></label>
+                                        <input type="number" class="form-control" placeholder="Minimum Bid" id="minim_bid" name="minim_bid" value="{!! $authority->minimum_bid !!}">
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="territory" class="form-label">Territory <span class="req text-danger">*</span></label>
+                                        <select name="territory" class="form-select select2selector">
+                                            <option value="0">Select State</option>
+                                            @foreach($provinces as $row)
+                                                <option value="{!! $row->id !!}" @selected($authority->territory == $row->id)>{!! $row->name !!}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-heading">
+                        <h6 class="accordion-header mt-0" id="headingFive" style="background-color: #edf7fd;padding:15px">
+                            <strong>Additional LOA Provisions </strong>
+                        </h6>
+                    </div>
+                    <div class="panel-body">
+                        <div class="accordion-body">
+                            <div class="card mb-4 mt-2 question-row" data-index="{{ $key }}">
+                                <div class="card-body">
+                                    <div class="row" id="questions-container">
+                                        @foreach($questions as $key => $item)
+                                            <div class="{{count($questions) > 1 ? "col-md-6" : "col-md-12"}}  questions mb-3" id="question-row-{{ $key }}">
+                                                <label for="questions_{{ $key }}" class="form-label w-100">Additional LOA Provision {{ $key+1 }} <i class="fa fa-trash remove-question text-danger float-right"></i></label>
+                                                <input type="text" class="form-control" placeholder="Additional LOA Provision" id="questions_{{ $key }}" name="questions[{{ $key }}]" value="{{ $item->question }}">
+                                                <input type="hidden" name="question_id[{{ $key }}]" value="{{ $item->id }}">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <button class="btn btn-success btn-xs mt-2" type="button" id="add-question">+ Add More</button>
                                 </div>
                             </div>
                         </div>
@@ -385,33 +386,31 @@
     $(document).find('.select2selector').select2();
     $(document).ready(function() {
         MultiStepFormJs(); // Include
-        $('input[name="status"]').change(function() {
-            var selectedValue = $('input[name="status"]:checked').val();
-            if (selectedValue == 'personal') {
-                $(document).find('.personal').removeClass('hidden');
-                $(document).find('.corporate').addClass('hidden');
-            }else if (selectedValue === 'corporate') {
-                $(document).find('.personal').addClass('hidden');
-                $(document).find('.corporate').removeClass('hidden');
-            }
+        $(document).on('click','#add-indemnitor',function(e){
+            e.preventDefault();
+            var itemCount = $('div.item-row').length;
+            itemCount++;
+            $.ajax({
+                url: '/append_indemnitor', // Replace with your route
+                method: 'GET',
+                data:{'itemCount':itemCount},
+                success: function(response) {
+                    if(response){
+                        $('.indemnitors_list').append(response);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        });
+        $(document).on('click','.remove-indemnitor',function (e){
+            $(this).parents('.item-row').remove();
         });
 
-        // Initial check to see which radio button is selected when the page loads
-        var selectedValue = $('input[name="status"]:checked').val();
-        if (selectedValue) {
-            if (selectedValue === 'personal') {
-                $(document).find('.personal').removeClass('hidden');
-                $(document).find('.corporate').addClass('hidden');
-            } else if (selectedValue === 'corporate') {
-                $(document).find('.personal').addClass('hidden');
-                $(document).find('.corporate').removeClass('hidden');
-            }
-        }
-    });
 
-</script>
-<script>
-    $(document).ready(function () {
+
+
         let questionIndex = {{ count($questions) }}; // Initialize index from the count of existing questions
 
         // Add a new question field dynamically
@@ -424,11 +423,11 @@
         function addQuestionField(value, index) {
             var length = $(document).find('.questions').length + 1;
             $(document).find('.questions:eq(0)').removeClass('col-md-12').addClass('col-md-6');
-            $(document).find('.questions:eq(0)').find('.form-label').text('Question 1');
+            $(document).find('.questions:eq(0)').find('.form-label').text('Additional LOA Provision 1');
             const newQuestionField = `
                      <div class="col-md-6 mb-3 questions" id="question_${questionIndex}">
-                        <label for="questions_${questionIndex}" class="form-label w-100">Question ${length}<i class="fa fa-trash remove-question text-danger float-right" data-index="${questionIndex}"></i> </label>
-                        <input type="text" class="form-control" placeholder="Questions" id="questions_${questionIndex}" name="questions[${questionIndex}]">
+                        <label for="questions_${questionIndex}" class="form-label w-100">Additional LOA Provision ${length}<i class="fa fa-trash remove-question text-danger float-right" data-index="${questionIndex}"></i> </label>
+                        <input type="text" class="form-control" placeholder="Additional LOA Provision" id="questions_${questionIndex}" name="questions[${questionIndex}]">
                     </div>`;
             $('#questions-container').append(newQuestionField);
             questionIndex++;
@@ -436,6 +435,42 @@
         $(document).on('click', '.remove-question', function () {
             $(this).closest('.questions').remove();
         });
+
+        $(document).ready(function () {
+                // Format the input field value on page load (edit case)
+                $('.monetary').each(function () {
+                    let rawValue = $(this).val(); // Get the raw value
+                    if (rawValue) {
+                        let formattedValue = formatAsCurrency(rawValue);
+                        $(this).val(formattedValue); // Display formatted value
+                    }
+                });
+
+                // Update the format dynamically as the user types
+                $('.monetary').on('input', function () {
+                    let rawValue = $(this).val().replace(/[^0-9.]/g, ''); // Remove non-numeric characters
+                    if (rawValue) {
+                        let formattedValue = formatAsCurrency(rawValue);
+                        $(this).val(formattedValue);
+                        $(this).data('numericValue', rawValue); // Store raw value for backend processing
+                    } else {
+                        $(this).val(''); // Clear the field if empty
+                        $(this).data('numericValue', ''); // Clear the numeric value storage
+                    }
+                });
+
+                // Function to format the number as currency
+                function formatAsCurrency(value) {
+                    value = value.replace(/[^0-9.]/g, ''); // Remove non-numeric characters
+                    let parts = value.split('.');
+                    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ','); // Add commas
+                    return '$' + (parts.length > 1 ? parts[0] + '.' + parts[1].substring(0, 2) : parts[0]); // Format as $1,234.56
+                }
+            });
+
+
+
+
     });
 </script>
 

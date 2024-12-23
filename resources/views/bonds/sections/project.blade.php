@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Project Zip<span class="req text-danger">*</span></label>
-                                    <input type="text" class="form-control"  name="project_zip" value="{{$obj->zip??''}}" placeholder="Project Zip"/>
+                                    <input type="text" class="form-control"  name="project_zip" value="{{$obj->zip??''}}" placeholder="Project Zip" maxlength="5" pattern="\d{5}"/>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Project Address<span class="req text-danger">*</span></label>
@@ -122,7 +122,7 @@
                                 </div>
                                 <div class="col-md-4 form-group">
                                     <label for="owner_zip" class="form-label">Oblige/Owner Zip<span class="req text-danger">*</span></label>
-                                    <input type="text" class="form-control " id="owner_zip" name="owner_zip"  value="{{$obj->owner_zip??''}}" required='required'>
+                                    <input type="text" class="form-control " id="owner_zip" name="owner_zip"  value="{{$obj->owner_zip??''}}" required='required' maxlength="5" pattern="\d{5}">
                                 </div>
 
                                 <div class="col-md-4 form-group">

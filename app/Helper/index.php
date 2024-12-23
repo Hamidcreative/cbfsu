@@ -122,11 +122,14 @@ if (!function_exists('corporation_types')) {
     function corporation_types()
     {
         return array(
-            '1' => 'Public Corporation',
-            '2' => 'Private Corporation',
-            '3' => 'Nonprofit Corporation',
+            '1' => 'Sole Proprietor',
+            '2' => 'LP',
+            '3' => 'LLC',
+            '4' => 'S-Corp',
+            '5' => 'C-Corp',
         );
     }
+
 }
 if (!function_exists('am_best_rating')) { // added here for easily change in future
     function am_best_rating(): array

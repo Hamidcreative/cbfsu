@@ -110,7 +110,7 @@
                 <td style="border: 1px solid #ddd; padding: 8px;">  {{ $c_user->largest_size}}  </td>
             </tr>
             <tr>
-                <td style="border: 1px solid #ddd; padding: 8px;"> Sate </td>
+                <td style="border: 1px solid #ddd; padding: 8px;"> State </td>
                 <td style="border: 1px solid #ddd; padding: 8px;">  {{ $c_user->state->name}}  </td>
             </tr>
             <tr  >

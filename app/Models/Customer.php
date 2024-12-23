@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rules\In;
 
 class Customer extends Model
 {
@@ -20,11 +21,15 @@ class Customer extends Model
         'phone',
         'signed_in',
         'address',
+        'address2',
         'corporation_type',
         'primary_contact',
         'average_size',
         'largest_size',
         'backlog',
+        'curtain',
+        'glazing',
+        'solar',
     ];
     public function user(){
         return $this->belongsTo(User::class,'user_id');
@@ -46,5 +51,8 @@ class Customer extends Model
     }
     public function questions(){
         return $this->hasMany(Questions::class,'customer_id');
+    }
+    public function indemnitors(){
+        return $this->hasMany(Indemnity::class,'customer_id');
     }
 }

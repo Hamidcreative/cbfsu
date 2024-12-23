@@ -165,7 +165,7 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <p class="mb-0">Obligee Sate</p>
+                                            <p class="mb-0">Obligee State</p>
                                         </div>
                                         <div class="col-sm-9">
                                             <p class="text-muted mb-0">{{$pm['province_name']??'N/A'}}</p>

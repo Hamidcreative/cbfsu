@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="Phone" class="form-label">Phone*</label>
-                        <input type="phone" class="form-control" id="Phone" name="phone" placeholder="Phone"
+                        <input type="phone" class="form-control phoneNo" id="Phone" name="phone"  maxlength="12" placeholder="000-000-0000"
                                value="{{isset($agent->phone) ? $agent->phone : ''}}"/>
                     </div>
                     <div class="col-md-12 mb-3 "  toggle="password-parent" style="position: relative">
