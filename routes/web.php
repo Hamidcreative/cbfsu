@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('state/get-cities',[ProvinceController::class,'getStateCities'])->name('state.get-cities');
     Route::post('append/surety_details', [CustomerController::class, 'surety_details'])->name('surety_details.append');
     Route::get('get-insurer/{id}',[\App\Http\Controllers\ProjectController::class,'insurers'])->name('project_management.getInsurers');
+    Route::get('append_indemnitor',[\App\Http\Controllers\CustomerController::class,'appendIndemnitor'])->name('append_indemnitor');
     Route::get('append_subcontractor_form', [BondController::class, 'append_subcontractor_form'])->name('append_subcontractor_form');
 
 

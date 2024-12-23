@@ -113,7 +113,7 @@
                         <input type="text" class="form-control" id="obligee_address" name="obligee_address" value="{!! $pm['oblige_address'] !!}" disabled/>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="name" class="form-label">Oblige Sate<span class="req text-danger">*</span></label>
+                        <label for="name" class="form-label">Oblige State<span class="req text-danger">*</span></label>
                         <select id="obligee_state" class="form-select select2selector" disabled>
                             <option value="0">Select State</option>
                             @foreach($provinces as $row)

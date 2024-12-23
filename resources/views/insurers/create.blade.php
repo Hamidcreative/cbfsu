@@ -51,7 +51,7 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="zip" class="form-label">Zip<span class="req text-danger">*</span></label>
-                                <input type="text" class="form-control" id="zip" name="zip" placeholder="Zip"/>
+                                <input type="text" class="form-control" id="zip" name="zip" placeholder="Zip" maxlength="5" pattern="\d{5}"/>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="zip" class="form-label">Surety Website<span class="req text-danger">*</span></label>
@@ -68,29 +68,29 @@
                     <div class="card-body">
                         <div class="row mt-2">
                             <div class="col-md-4 mb-3">
-                                <label for="zip" class="form-label">Contract Bond Underwriter<span class="req text-danger">*</span></label>
-                                <input type="text" class="form-control" id="zip" name="cbu_name" placeholder="Contract Bond Underwriter"/>
+                                <label for="cbu_name" class="form-label">Contract Bond Underwriter<span class="req text-danger">*</span></label>
+                                <input type="text" class="form-control" id="cbu_name" name="cbu_name" placeholder="Contract Bond Underwriter"/>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="zip" class="form-label">Phone<span class="req text-danger">*</span></label>
-                                <input type="text" class="form-control" id="zip" name="cbu_phone" placeholder="Phone"/>
+                                <label for="cbu_phone" class="form-label">Phone<span class="req text-danger">*</span></label>
+                                <input type="text" class="form-control phoneNo" id="cbu_phone" name="cbu_phone" maxlength="12" placeholder="000-000-0000"/>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="zip" class="form-label">Email<span class="req text-danger">*</span></label>
-                                <input type="text" class="form-control" id="zip" name="cbu_email" placeholder="Email"/>
+                                <label for="cbu_email" class="form-label">Email<span class="req text-danger">*</span></label>
+                                <input type="text" class="form-control" id="cbu_email" name="cbu_email" placeholder="Email"/>
                             </div>
 
                             <div class="col-md-4 mb-3">
-                                <label for="zip" class="form-label">Commercial Bond Underwriter<span class="req text-danger">*</span></label>
-                                <input type="text" class="form-control" id="zip" name="clbu_name" placeholder="Contract Bond Underwriter"/>
+                                <label for="clbu_name" class="form-label">Commercial Bond Underwriter<span class="req text-danger">*</span></label>
+                                <input type="text" class="form-control" id="clbu_name" name="clbu_name" placeholder="Contract Bond Underwriter"/>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="zip" class="form-label">Phone<span class="req text-danger">*</span></label>
-                                <input type="text" class="form-control" id="zip" name="clbu_phone" placeholder="Phone"/>
+                                <label for="clbu_phone" class="form-label">Phone<span class="req text-danger">*</span></label>
+                                <input type="text" class="form-control phoneNo" id="clbu_phone" name="clbu_phone" maxlength="12" placeholder="000-000-0000" />
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="zip" class="form-label">Email<span class="req text-danger">*</span></label>
-                                <input type="text" class="form-control" id="zip" name="clbu_email" placeholder="Email"/>
+                                <label for="clbu_email" class="form-label">Email<span class="req text-danger">*</span></label>
+                                <input type="text" class="form-control" id="clbu_email" name="clbu_email" placeholder="Email"/>
                             </div>
                         </div>
                     </div>

@@ -1663,6 +1663,15 @@ $(document).ready(function () {
         }
         // $(this).addClass('openSidebar').removeClass('closeSidebar');
     });
+    $('body').on('input','.phoneNo', function () {
+        let value = $(this).val().replace(/\D/g, ''); // Remove non-digit characters
+        if (value.length > 3 && value.length <= 6) {
+            value = value.replace(/(\d{3})(\d+)/, '$1-$2');
+        } else if (value.length > 6) {
+            value = value.replace(/(\d{3})(\d{3})(\d+)/, '$1-$2-$3');
+        }
+        $(this).val(value);
+    });
 });
 
 window.isJsonString = (str) => {
@@ -1781,6 +1790,9 @@ window.MultiStepFormJs = () => {
         $(this).next('span').next('.text-danger').remove();
     });
 }
+
+
+
 
 
 
