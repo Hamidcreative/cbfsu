@@ -44,7 +44,7 @@
                                value="{{$customer->phone}}"/>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="name" class="form-label">Sate<span class="req text-danger">*</span></label>
+                        <label for="name" class="form-label">State<span class="req text-danger">*</span></label>
                         <select target='select[name="city_id"]' placeholder="Select City"
                                 url="{!! route('state.get-cities') !!}" params="province_id" name="province_id"
                                 class="form-select changeInputMws input_province_id select2selector">

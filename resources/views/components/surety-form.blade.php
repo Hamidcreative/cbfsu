@@ -13,7 +13,7 @@
     </div>
     <div class="col-md-6 mb-3">
         <label for="underwriter_phone" class="form-label">Underwriter Phone<span class="req text-danger">*</span></label>
-        <input type="text" class="form-control" id="underwriter_phone" name="underwriter_phone" placeholder="Underwriter Phone" value="{{$insurer->cbu_phone}}"/>
+        <input type="text" class="form-control phoneNo" id="underwriter_phone" name="underwriter_phone" maxlength="12" placeholder="000-000-0000" value="{{$insurer->cbu_phone}}"/>
     </div>
     <div class="col-md-6 mb-3">
         <label for="underwriter_email" class="form-label">Underwriter Email<span class="req text-danger">*</span></label>

@@ -6,6 +6,7 @@ use App\DataTables\CustomerDataTable;
 use App\Mail\CustomerMail;
 use App\Mail\PasswordForgot;
 use App\Models\Agent;
+use App\Models\Indemnity;
 use App\Models\Authority;
 use App\Models\City;
 use App\Models\Insurer;
@@ -45,6 +46,7 @@ class CustomerController extends Controller
 
     public function store(Request $request)
     {
+
         $request->validate([
             'corporation_type'      => 'required|gt:0',
             'name'                  => 'required',
@@ -63,8 +65,8 @@ class CustomerController extends Controller
             'start_date'            => 'required',
             'exp_date'              => 'required',
             'territory'             => 'required|gt:0',
-            'single_limt'            => 'required|',
-            'aggr_limt'              => 'required',
+            'single_limt'           => 'required|',
+            'aggr_limt'             => 'required',
             'design_build'          => 'required',
             'job_dur'               => 'required',
             'warranty_dur'          => 'required',
@@ -109,15 +111,31 @@ class CustomerController extends Controller
             'corporation_type'    => $request['corporation_type'],
             'primary_contact'     => $request['primary_contact'],
             'phone'               => $request['phone'],
-            'average_size'        => $request['average_size'],
-            'largest_size'        => $request['largest_size'],
-            'backlog'             => $request['backlog'],
+            'average_size'        => str_replace([',', '$'], '', $request['average_size']),
+            'largest_size'        => str_replace([',', '$'], '', $request['largest_size']),
+            'backlog'             => str_replace([',', '$'], '', $request['backlog']),
             'state_id'            => $request['province_id'],
             'city_id'             => $request['city_id'],
             'zip'                 => $request['zip'],
             'address'             => $request['address'],
+            'address2'            => $request['address2'],
+            'curtain'             => $request['curtain'],
+            'glazing'             => $request['glazing'],
+            'solar'               => $request['solar'],
         ];
         $customer = Customer::create($customerData);
+        if($request['indemnitors']){
+            foreach ($request['indemnitors'] as $indemnitor){
+                if($indemnitor['personal']){
+                    $indemnitiesData =[
+                        'customer_id' => $customer->id,
+                        'corporate'   => $indemnitor['personal'],
+                        'personal'    => $indemnitor['corporate'],
+                    ];
+                    Indemnity::create($indemnitiesData);
+                }
+            }
+        }
         $authority_data = [
             'customer_id'      =>   $customer->id,
             'insurer_id'       =>    $request['insurer'],
@@ -228,22 +246,20 @@ class CustomerController extends Controller
 
         ], [
             'corporation_type' => 'The corporation type field is required.',
-            'name'           => 'The Positions field is required.',
-            'positions.gt'   => 'The Positions field is required.',
-            'province_id.gt' => 'The State field is required.',
-            'city_id.gt'     => 'The Headquarter field is required.',
-            'agent_id.gt'    => 'The Agent field is required.',
-            'insurer'        => 'The surety name field is required.',
-            'start_date'     => 'The effective date field is required.',
-            'exp_date'       => 'The expiration date field is required.',
-            'single_limt'     => 'The single project limit field is required.',
-            'aggr_limt'       => 'The aggregate limit field is required.',
-            'job_dur'        => 'The job duration field is required.',
-            'warranty_dur'   => 'The warranty period field is required.',
-            'minim_bid'      => 'The bid spread field is required.',
-            'territory'      => 'The territory field is required.',
-
-
+            'name'             => 'The Positions field is required.',
+            'positions.gt'     => 'The Positions field is required.',
+            'province_id.gt'   => 'The State field is required.',
+            'city_id.gt'       => 'The Headquarter field is required.',
+            'agent_id.gt'      => 'The Agent field is required.',
+            'insurer'          => 'The surety name field is required.',
+            'start_date'       => 'The effective date field is required.',
+            'exp_date'         => 'The expiration date field is required.',
+            'single_limt'      => 'The single project limit field is required.',
+            'aggr_limt'        => 'The aggregate limit field is required.',
+            'job_dur'          => 'The job duration field is required.',
+            'warranty_dur'     => 'The warranty period field is required.',
+            'minim_bid'        => 'The bid spread field is required.',
+            'territory'        => 'The territory field is required.',
         ]);
 
         $role = Role::select('slug','id')->where('slug','customer')->first();
@@ -254,24 +270,57 @@ class CustomerController extends Controller
             'password' => Hash::make($request['password']),
 
         ];
-        $user = User::where('id',$request['user_id'])->update($data);
-
+        User::where('id',$request['user_id'])->update($data);
         $customerData = [
-//            'user_id'             => $request['user_id'],
             'signed_in'           => Carbon::now(),
             'corporation_type'    => $request['corporation_type'],
             'primary_contact'     => $request['primary_contact'],
             'phone'               => $request['phone'],
-            'average_size'        => $request['average_size'],
-            'largest_size'        => $request['largest_size'],
-            'backlog'             => $request['backlog'],
+            'average_size'        => str_replace([',', '$'], '', $request['average_size']),
+            'largest_size'        => str_replace([',', '$'], '', $request['largest_size']),
+            'backlog'             => str_replace([',', '$'], '', $request['backlog']),
             'state_id'            => $request['province_id'],
             'city_id'             => $request['city_id'],
             'zip'                 => $request['zip'],
             'address'             => $request['address'],
+            'address2'            => $request['address2'],
+            'curtain'             => $request['curtain'],
+            'glazing'             => $request['glazing'],
+            'solar'               => $request['solar'],
         ];
-        $customer = Customer::where('id',$request['cust_id'])->update($customerData);
+        Customer::where('id',$request['cust_id'])->update($customerData);
+        $customer = Customer::findOrFail($request['cust_id']);
 
+        if ($request->has('indemnitors')) {
+            $existingIndemnitorIds = $customer->indemnitors->pluck('id')->toArray(); // Existing indemnitor IDs
+            $incomingIndemnitorIds = [];
+
+            foreach ($request['indemnitors'] as $indemnitor) {
+                if (!empty($indemnitor['id'])) {
+                    // Update existing indemnitor
+                    $indemnity = Indemnity::find($indemnitor['id']);
+                    if ($indemnity) {
+                        $indemnity->update([
+                            'corporate' => $indemnitor['personal'],
+                            'personal'  => $indemnitor['corporate'],
+                        ]);
+                        $incomingIndemnitorIds[] = $indemnitor['id'];
+                    }
+                } else {
+                    $newIndemnity = Indemnity::create([
+                        'customer_id' => $customer->id,
+                        'corporate'   => $indemnitor['personal'],
+                        'personal'    => $indemnitor['corporate'],
+                    ]);
+                    $incomingIndemnitorIds[] = $newIndemnity->id;
+                }
+            }
+            $idsToDelete = array_diff($existingIndemnitorIds, $incomingIndemnitorIds);
+            Indemnity::destroy($idsToDelete);
+        }else{
+            $existingIndemnitorIds = $customer->indemnitors->pluck('id')->toArray(); // Existing indemnitor IDs
+            Indemnity::destroy($existingIndemnitorIds);
+        }
         $authority_data = [
             'customer_id'      =>    $request['cust_id'],
             'insurer_id'       =>    $request['insurer'],
@@ -356,7 +405,6 @@ class CustomerController extends Controller
         $d_id   =   mws_encrypt('D',$id);
         $customer = Customer::where('id',$d_id)->first();
         return view('customers.show', compact('customer'));
-//        return view('customers.show', compact('customer'));
     }
 
     public function status(Request $request,$id, $status){
@@ -407,11 +455,7 @@ class CustomerController extends Controller
     {
         $userId = Auth::user()->id;
         $customer = Customer::where('user_id',$userId)->first();
-//        echo "<pre>";
-//        print_r($customer->authority->surerty->name);
-//        exit;
         return view('customers.profile', compact('customer'));
-//        return view('customers.profile1', compact('customer'));
     }
 
 
@@ -421,7 +465,10 @@ class CustomerController extends Controller
             $insurer = Insurer::where('id', $surety_id)->first();
             return view('components.surety-form', compact('insurer'));
         }
-
+    }
+    public function appendIndemnitor(Request $request){
+        $itemCount = $request['itemCount'];
+        return view('components.append-indemnitor', compact('itemCount'));
     }
     public function landPageDetail()
     {

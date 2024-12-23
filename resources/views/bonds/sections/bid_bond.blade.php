@@ -58,7 +58,7 @@ xmlns="http://www.w3.org/1999/html">
 
     <div class="container p-0 mt-4">
         <h6 class="accordion-header mt-0" id="headingFive" style="background-color: #edf7fd;padding:15px">
-            <strong>Questions </strong>
+            <strong>Additional LOA Provisions </strong>
         </h6>
         <div class="row mt-2">
             <div class="col-md-12">

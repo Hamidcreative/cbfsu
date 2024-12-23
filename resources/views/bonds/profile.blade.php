@@ -24,7 +24,7 @@
                 </div>
                 <div class="stepwizard-step col-xs-3">
                     <a href="#step-2" type="button" class="btn btn-default btn-circle"><i class="circle" aria-hidden="true"></i></a>
-                    <p>Indemnity</p>
+                    <p>Indemnities</p>
                 </div>
                 <div class="stepwizard-step col-xs-3">
                     <a href="#step-3" type="button" class="btn btn-default btn-circle"><i class="circle" aria-hidden="true"></i></a>
@@ -123,7 +123,7 @@
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <p class="mb-0">Sate</p>
+                                        <p class="mb-0">State</p>
                                     </div>
                                     <div class="col-sm-9">
                                         <p class="text-muted mb-0">{{$customer->state->name ??''}}</p>
@@ -167,7 +167,7 @@
                 <div class="panel-heading">
                     <hr style="margin-top: 0;">
                     <h6 class="accordion-header mt-0" id="headingFive" style="background-color: #edf7fd;padding:15px">
-                        <strong>Indemnity </strong>
+                        <strong>Indemnities </strong>
                     </h6>
                 </div>
                 <div class="panel-body">
