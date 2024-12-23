@@ -171,7 +171,7 @@
                         @if($customer)
                             @if(count($customer->indemnitors)>0)
                                 @foreach($customer->indemnitors as $key => $indemnitor)
-                                    <x-append-indemnitor :itemCount="$key" :indemnitor="$indemnitor"/>
+                                    <x-append-indemnitor :itemCount="$key+1" :indemnitor="$indemnitor"/>
                                 @endforeach
                             @else
                                 <x-append-indemnitor itemCount="1" :indemnitor="0"/>
