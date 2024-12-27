@@ -90,7 +90,7 @@
 
                                     <div class="col-md-4 mb-3">
                                         <label for="zip" class="form-label">Zip <span class="req text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="zip" name="zip" placeholder="Zip" maxlength="5" pattern="\d{5}"/>
+                                        <input type="number" class="form-control zipCode" id="zip" name="zip" placeholder="Zip"/>
                                     </div>
 
                                     <div class="col-md-4 mb-3">
@@ -129,7 +129,7 @@
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="largest_size" class="form-label">Largest Project Size <span class="req text-danger">*</span></label>
-                                        <input type="test" class="form-control monetary" id="largest_size" name="largest_size" placeholder="$0.00" />
+                                        <input type="text" class="form-control monetary" id="largest_size" name="largest_size" placeholder="$0.00" />
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="backlog" class="form-label">Largest Backlog <span class="req text-danger">*</span></label>
@@ -251,11 +251,11 @@
 
                                     <div class="col-md-4 mb-3">
                                         <label class="form-label">Single Project Limit <span class="req text-danger">*</span></label>
-                                        <input type="number" class="form-control" placeholder="Single Job Limit" name="single_limt">
+                                        <input type="text" class="form-control monetary" placeholder="Single Job Limit" name="single_limt">
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="number" class="form-label">Aggregate Limit <span class="req text-danger">*</span></label>
-                                        <input type="number" class="form-control" id="number" name="aggr_limt" placeholder="Aggregate Limit"/>
+                                        <input type="text" class="form-control monetary" id="number" name="aggr_limt" placeholder="Aggregate Limit"/>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="name" class="form-label">Job Duration (Years) <span class="req text-danger">*</span></label>
@@ -388,20 +388,5 @@
         $(document).on('click', '.remove-question', function () {
             $(this).closest('.questions').remove();
         });
-
-        $('.monetary').on('input', function () {
-            let value = $(this).val().replace(/[^0-9.]/g, '');
-            if (value) {
-                let parts = value.split('.');
-                parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-                value = parts.length > 1 ? parts[0] + '.' + parts[1].substring(0, 2) : parts[0];
-                $(this).val('$' + value);
-            } else {
-                $(this).val(''); // Clear the field if the value is empty
-            }
-        });
-
-
-
     });
 </script>

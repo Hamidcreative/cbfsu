@@ -131,18 +131,18 @@ class BondController extends Controller
             ]);
             $project_data=[
 
-                'name'     => $request['project_name'],
-                'state_id'     => $request['province_id'],
-                'city_id'     => $request['city_id'],
-                'zip'     => $request['project_zip'],
-                'address'     => $request['project_address'],
-                'delivery_method'     => $request['project_delivery_method'],
-                'start_date'     => $request['est_pro_start'],
-                'completion_date'     => $request['est_pro_compl'],
-                'warranty_terms'     => $request['warranty_term'],
-                'damages'     => $request['liquidated_damages'],
-                'retain_amount'     => $request['retainage_amount'],
-                'current_backlog'     => $request['current_backlog'],
+                'name'          => $request['project_name'],
+                'state_id'      => $request['province_id'],
+                'city_id'       => $request['city_id'],
+                'zip'           => $request['project_zip'],
+                'address'           => $request['project_address'],
+                'delivery_method'   => $request['project_delivery_method'],
+                'start_date'        => $request['est_pro_start'],
+                'completion_date'   => $request['est_pro_compl'],
+                'warranty_terms'    => $request['warranty_term'],
+                'damages'           => amountFormatReverse($request['liquidated_damages']),
+                'retain_amount'     => amountFormatReverse($request['retainage_amount']),
+                'current_backlog'   => $request['current_backlog'],
                 'engineer_name'     => $request['engineer_name'],
                 'owner_name'     => $request['owner_name'],
                 'owner_zip'      => $request['owner_zip'],
@@ -152,7 +152,7 @@ class BondController extends Controller
                 'job_location'   => $request['job_location'],
                 'owner_state'    => $request['owner_state'],
                 'owner_city'     => $request['owner_city'],
-                'bond_type'              => 0,
+                'bond_type'      => 0,
             ];
             $general_data=[
                 'customer_id' => $request['customer_id'],
@@ -172,12 +172,12 @@ class BondController extends Controller
                 'owner_bid_date'       => $request['owner_bid_date'],
                 'bid_start_date'       => $request['bid_start_date'],
                 'bid_completion_date'  => $request['bid_completion_date'],
-                'bid_amount'           => $request['bid_amount'],
-                'bid_project_cost'     => $request['bid_project_cost'],
+                'bid_amount'           => amountFormatReverse($request['bid_amount']),
+                'bid_project_cost'     => amountFormatReverse($request['bid_project_cost']),
                 'bid_amount_percentage'=> $request['bid_amount_percentage'],
                 'gpm'     => $request['gpm'],
                 'bid_warranty_period'  => $request['bid_warranty_period'],
-                'bid_damages'          => $request['bid_damages'],
+                'bid_damages'          => amountFormatReverse($request['bid_damages']),
             ];
             $bondObj->update($bid_data);
 
@@ -219,12 +219,12 @@ class BondController extends Controller
             }
             $pb_data = [
                 'pb_contract_date'    => $request->input('pb_contract_date'),
-                'pb_contract_amount'  => $request->input('pb_contract_amount'),
-                'pb_estimated_profit' => $request->input('pb_estimated_profit'),
+                'pb_contract_amount'  => amountFormatReverse($request->input('pb_contract_amount')),
+                'pb_estimated_profit' => amountFormatReverse($request->input('pb_estimated_profit')),
                 'pb_start_date'       => $request->input('pb_start_date'),
                 'pb_completion_date'  => $request->input('pb_completion_date'),
                 'pb_warranty_period'  => $request->input('pb_warranty_period'),
-                'pb_damages'          => $request->input('pb_damages'),
+                'pb_damages'          => amountFormatReverse($request->input('pb_damages')),
                 'is_subcontracted'    => $request->input('is_subcontracted'),
             ];
 
@@ -237,7 +237,7 @@ class BondController extends Controller
                         'bond_id'    => $bondObj->id,
                         'name'       => $contractor['name'],
                         'type'       => $contractor['type'],
-                        'bid_amount' => $contractor['amount'],
+                        'bid_amount' => amountFormatReverse($contractor['amount']),
                         'is_bonded'  => isset($contractor['bonded']) ? $contractor['bonded'] : false,
                     ];
                     $contractorObj = SubContractor::create($data);
@@ -296,7 +296,7 @@ class BondController extends Controller
                     'name'          => $customer->user->name,
                     'email'         => $customer->user->email,
                     'phone'         => $customer->phone,
-                    'bid_amount'    => $request['bid_value'],
+                    'bid_amount'    => amountFormatReverse($request['bid_value']),
                     'project_limit' => $authority->single_job_limit,
                     ];
             Mail::to('jasim.khan2007@gmail.com')->send(new GeneralMail($mail_data,'bondLimitExceededToAdmin'));
@@ -472,11 +472,11 @@ class BondController extends Controller
         $data = [
             'perf_contract_detail'   => $request['contract_detail'],
             'perf_contract_date'     => $request['contract_date'],
-            'perf_contract_amount'   => $request['contract_amount'],
+            'perf_contract_amount'   => amountFormatReverse($request['contract_amount']),
             'perf_description'       => $request['description'],
             'perf_bond_detail'       => $request['bond_detail'],
             'perf_date'              => $request['date'],
-            'perf_amount'            => $request['amount'],
+            'perf_amount'            => amountFormatReverse($request['amount']),
             'bond_type'              => 1,
         ];
 

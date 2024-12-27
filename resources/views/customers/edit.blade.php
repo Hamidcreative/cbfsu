@@ -96,7 +96,7 @@
 
                                     <div class="col-md-4 mb-3">
                                         <label for="zip" class="form-label">Zip <span class="req text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="zip" name="zip" placeholder="Zip" value="{!! $customer->zip !!}" maxlength="5" pattern="\d{5}"/>
+                                        <input type="number" class="form-control zipCode" id="zip" name="zip" placeholder="Zip" value="{!! $customer->zip !!}" maxlength="5" pattern="\d{5}"/>
                                     </div>
 
 
@@ -283,11 +283,11 @@
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label class="form-label">Single Project Limit <span class="req text-danger">*</span></label>
-                                        <input type="number" class="form-control" placeholder="Single Job Limit" name="single_limt" value="{{$authority->single_job_limit}}"/>
+                                        <input type="text" class="form-control monetary" placeholder="Single Job Limit" name="single_limt" value="{{$authority->single_job_limit}}"/>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="number" class="form-label">Aggregate Limit <span class="req text-danger">*</span></label>
-                                        <input type="number" class="form-control" id="number" name="aggr_limt" placeholder="Aggregate Limit" value="{{$authority->aggregate_limit}}"/>
+                                        <input type="text" class="form-control monetary" id="number" name="aggr_limt" placeholder="Aggregate Limit" value="{{$authority->aggregate_limit}}"/>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="name" class="form-label">Job Duration (Years) <span class="req text-danger">*</span></label>

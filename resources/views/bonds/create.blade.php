@@ -77,15 +77,6 @@
             </div>
             @include('bonds.sections.bid_bond')
         </div>
-{{--        <div class="panel panel-primary setup-content" id="step-4">--}}
-{{--            <div class="panel-heading">--}}
-{{--                <hr style="margin-top: 0;">--}}
-{{--                <h6 class="accordion-header mt-0" id="headingFive" style="background-color: #edf7fd;padding:15px">--}}
-{{--                    <strong>Performance & Payment Bond </strong>--}}
-{{--                </h6>--}}
-{{--            </div>--}}
-{{--            @include('bonds.sections.payment_bond')--}}
-{{--        </div>--}}
         <div class="panel panel-primary setup-content" id="step-5">
                 <div class="panel-heading">
                     <hr style="margin-top: 0;">
@@ -95,8 +86,6 @@
                 </div>
                 @include('bonds.sections.attachments')
         </div>
-
-
     </div>
 
 </x-app-layout>
@@ -105,6 +94,8 @@
     $('#bid_bond, #project_cost').on('change', function () {
         var bid_bond = $('#bid_bond').val();
         var project_cost  = $('#project_cost').val();
+        bid_bond = bid_bond.replace(/[^0-9]/g, '');
+        project_cost = project_cost.replace(/[^0-9]/g, '');
 
         if (!isNaN(bid_bond) && !isNaN(project_cost) && project_cost !== 0) {
             var result = bid_bond  / project_cost ;

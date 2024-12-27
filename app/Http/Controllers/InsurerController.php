@@ -98,10 +98,6 @@ class InsurerController extends Controller
 
     public function edit(Insurer $insurer)
     {
-//        $underwriters = User::from(TableName(User::class).' as user')
-//        ->leftJoin(TableName(Role::class).' as role','user.role_id','=','role.id')
-//        ->select('user.id as id','user.name as name')
-//        ->where([ 'role.slug' => 'underwriter' ])->get();
         $provinces = Province::select('id','name')->where('status',true)->orderBY('name')->get();
         $cities = City::select('id','name')->where('status',true)->where('province_id',$insurer['state_id'])->orderBY('name')->get();
         return view('insurers.edit',compact('insurer','provinces','cities'));

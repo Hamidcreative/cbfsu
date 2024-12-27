@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Contract Amount<span class="req text-danger">*</span></label>
-                        <input type="number" class="form-control"  name="contract_amount" value="{{$bond->perf_contract_amount??''}}"/>
+                        <input type="text" class="form-control monetary"  name="contract_amount" value="{{$bond->perf_contract_amount??''}}"/>
                     </div>
                 </div>
                 <div class="row">
@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Amount<span class="req text-danger">*</span></label>
-                        <input type="number" class="form-control"  name="amount" value="{{$bond->perf_amount??''}}"/>
+                        <input type="text" class="form-control monetary"  name="amount" value="{{$bond->perf_amount??''}}"/>
                     </div>
 
                     <div class="col-md-6 mb-3">

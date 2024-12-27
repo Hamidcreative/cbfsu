@@ -55,7 +55,7 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="zip" class="form-label">Zip<span class="req text-danger">*</span></label>
-                                <input type="text" class="form-control" id="zip" name="zip" placeholder="Zip" value="{{$insurer->zip}}" maxlength="5" pattern="\d{5}"/>
+                                <input type="text" class="form-control zipCode" id="zip" name="zip" placeholder="Zip" value="{{$insurer->zip}}" maxlength="5" pattern="\d{5}"/>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="website" class="form-label">Surety Website<span class="req text-danger">*</span></label>
