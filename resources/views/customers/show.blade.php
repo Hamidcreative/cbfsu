@@ -309,7 +309,7 @@
                                         <p class="mb-0"> Single Project Limit  </p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="text-muted mb-0"> {{ amountFormat($customer->authority->single_job_limit)}}  </p>
+                                        <p class="text-muted mb-0"> {{ amountFormat($customer->authority->single_job_limit??'')}}  </p>
                                     </div>
                                 </div>
                                 <hr>
@@ -318,7 +318,7 @@
                                         <p class="mb-0">Aggregate Limit  </p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="text-muted mb-0"> {{amountFormat($customer->authority->aggregate_limit)}}  </p>
+                                        <p class="text-muted mb-0"> {{amountFormat($customer->authority->aggregate_limit??'')}}  </p>
                                     </div>
                                 </div>
                                 <hr>
