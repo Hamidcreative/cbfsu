@@ -13,14 +13,6 @@
                     <div class="card mb-2">
                         <div class="card-body">
                             <div class="row">
-{{--                            <div class="col-md-4 form-group">--}}
-{{--                                <label for="Description" class="form-label">Job Description<span class="req text-danger">*</span></label>--}}
-{{--                                <textarea class="form-control" id="Description" name="job_description" rows="3">{{$obj->job_description??''}}</textarea>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-md-4 form-group">--}}
-{{--                                <label for="location" class="form-label">Job Location<span class="req text-danger">*</span></label>--}}
-{{--                                <textarea class="form-control" id="location" name="job_location" rows="3">{{$obj->job_location??''}}</textarea>--}}
-{{--                            </div>--}}
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Project Name<span class="req text-danger">*</span></label>
                                     <input type="text" class="form-control"  name="project_name" value="{{$obj->name??''}}" placeholder="Project Name"/>
@@ -49,7 +41,7 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Project Zip<span class="req text-danger">*</span></label>
-                                    <input type="text" class="form-control"  name="project_zip" value="{{$obj->zip??''}}" placeholder="Project Zip" maxlength="5" pattern="\d{5}"/>
+                                    <input type="number" class="form-control zipCode" name="project_zip" value="{{$obj->zip??''}}" placeholder="Project Zip" />
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Project Address<span class="req text-danger">*</span></label>
@@ -73,25 +65,16 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Liquidated Damages<span class="req text-danger">*</span></label>
-                                    <input type="number" class="form-control"  name="liquidated_damages" placeholder="Liquidated Damages" value="{{$obj->damages??''}}"/>
+                                    <input type="text" class="form-control monetary"  name="liquidated_damages" placeholder="$0.00" value="{{$obj->damages??''}}"/>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Retainage Amount<span class="req text-danger">*</span></label>
-                                    <input type="number" class="form-control"  name="retainage_amount" placeholder="Retainage Amount" value="{{$obj->retain_amount??''}}"/>
+                                    <input type="text" class="form-control monetary"  name="retainage_amount" placeholder="$0.00" value="{{$obj->retain_amount??''}}"/>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Current Backlog<span class="req text-danger">*</span></label>
                                     <input type="text" class="form-control"  name="current_backlog" placeholder="Current Backlog" value="{{$obj->current_backlog??''}}"/>
                                 </div>
-    {{--                            <div class="col-md-4 form-group">--}}
-    {{--                                <label for="bid_date" class="form-label">Bid Date<span class="req text-danger">*</span></label>--}}
-    {{--                                <input type="date" class="form-control" id="bid_date" name="owner_bid_date" value="{{$obj->owner_bid_date??''}}" required='required'>--}}
-    {{--                            </div>--}}
-
-{{--                                <div class="col-md-4 mb-3">--}}
-{{--                                    <label class="form-label">GPM<span class="req text-danger">*</span></label>--}}
-{{--                                    <input type="number" class="form-control" name="gpm" placeholder="GPM" id="gpm" value="{{$obj->gpm??''}}" readonly/>--}}
-{{--                                </div>--}}
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Engineer Name<span class="req text-danger">*</span></label>
                                     <input type="text" class="form-control"  name="engineer_name" placeholder="Engineer Name" value="{{$obj->engineer_name??''}}"/>
@@ -122,7 +105,7 @@
                                 </div>
                                 <div class="col-md-4 form-group">
                                     <label for="owner_zip" class="form-label">Oblige/Owner Zip<span class="req text-danger">*</span></label>
-                                    <input type="text" class="form-control " id="owner_zip" name="owner_zip"  value="{{$obj->owner_zip??''}}" required='required' maxlength="5" pattern="\d{5}">
+                                    <input type="number" class="form-control zipCode" id="owner_zip" name="owner_zip"  value="{{$obj->owner_zip??''}}" required='required' maxlength="5" pattern="\d{5}">
                                 </div>
 
                                 <div class="col-md-4 form-group">

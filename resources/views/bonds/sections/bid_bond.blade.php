@@ -26,11 +26,11 @@ xmlns="http://www.w3.org/1999/html">
                             </div>
                             <div class="col-md-6 form-group">
                                 <label for="bid_amount" class="form-label">How Much Will You Bid  $ <span class="req text-danger">*</span></label>
-                                <input type="number" class="form-control " id="bid_bond" name="bid_amount" value="{{$obj->bid_amount??''}}" required='required'>
+                                <input type="text" class="form-control monetary" id="bid_bond" name="bid_amount" value="{{$obj->bid_amount??''}}" required='required'>
                             </div>
                             <div class="col-md-6 form-group">
                                 <label for="project_cost" class="form-label">What is Your Project Cost $<span class="req text-danger">*</span></label>
-                                <input type="number" class="form-control " id="project_cost" name="bid_project_cost" value="{{$obj->bid_project_cost??''}}" required='required'>
+                                <input type="text" class="form-control monetary" id="project_cost" name="bid_project_cost" value="{{$obj->bid_project_cost??''}}" required='required'>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">GPM  ( % ) <span class="req text-danger">*</span></label>
@@ -46,7 +46,7 @@ xmlns="http://www.w3.org/1999/html">
                             </div>
                             <div class="col-md-6 form-group">
                                 <label for="damages" class="form-label"> Liquidated Damages <span class="req text-danger">*</span></label>
-                                <input type="number" class="form-control " id="damages" name="bid_damages" value="{{$obj->bid_damages??''}}" required='required'>
+                                <input type="text" class="form-control monetary" placeholder="$0.00" id="damages" name="bid_damages" value="{{$obj->bid_damages??''}}" required='required'>
                             </div>
                         </div>
                     </div>

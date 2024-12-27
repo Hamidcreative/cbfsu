@@ -34,7 +34,7 @@
                                     <p class="mb-0"> Single Project Limit  </p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0"> {{$customer->authority->single_job_limit ?? ''}}  </p>
+                                    <p class="text-muted mb-0"> {{amountFormat($customer->authority->single_job_limit)}} </p>
                                 </div>
                             </div>
                             <hr>
@@ -43,7 +43,7 @@
                                     <p class="mb-0">Aggregate Limit  </p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0"> {{$customer->authority->aggregate_limit ?? ''}}  </p>
+                                    <p class="text-muted mb-0"> {{amountFormat($customer->authority->aggregate_limit)}}  </p>
                                 </div>
                             </div>
                             <hr>
@@ -59,7 +59,7 @@
 
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <p class="mb-0"> Warranty Period (years) </p>
+                                    <p class="mb-0"> Warranty Period (Years) </p>
                                 </div>
                                 <div class="col-sm-9">
                                     <p class="text-muted mb-0"> {{$customer->authority->warranty_duration ?? ''}}  </p>
@@ -117,7 +117,7 @@
                                     <p class="mb-0"> Bid Spread % </p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0"> {{$customer->authority->minimum_bid ?? ''}}  </p>
+                                    <p class="text-muted mb-0"> {{$customer->authority->minimum_bid ?? ''}} % </p>
                                 </div>
                             </div>
                             <hr>

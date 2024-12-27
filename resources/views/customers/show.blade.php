@@ -309,7 +309,7 @@
                                         <p class="mb-0"> Single Project Limit  </p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="text-muted mb-0"> {{$customer->authority->single_job_limit ?? ''}}  </p>
+                                        <p class="text-muted mb-0"> {{ amountFormat($customer->authority->single_job_limit)}}  </p>
                                     </div>
                                 </div>
                                 <hr>
@@ -318,7 +318,7 @@
                                         <p class="mb-0">Aggregate Limit  </p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="text-muted mb-0"> {{$customer->authority->aggregate_limit ?? ''}}  </p>
+                                        <p class="text-muted mb-0"> {{amountFormat($customer->authority->aggregate_limit)}}  </p>
                                     </div>
                                 </div>
                                 <hr>
@@ -392,7 +392,7 @@
                                         <p class="mb-0"> Bid Spread % </p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="text-muted mb-0"> {{$customer->authority->minimum_bid ?? ''}}  </p>
+                                        <p class="text-muted mb-0"> {{$customer->authority->minimum_bid ?? ''}} %  </p>
                                     </div>
                                 </div>
                                 <hr>
@@ -438,7 +438,6 @@
             </div>
         </form>
     </div>
-
 </x-app-layout>
 <script src="{!! asset('assets/js/jquery-ui.min.js') !!}?v=11"></script>
 <script src="{!! asset('assets/js/jquery.signature.js') !!}?v=11"></script>
@@ -446,6 +445,5 @@
     $(document).ready(function() {
         MultiStepFormJs(); // Include
     });
-
 </script>
 
