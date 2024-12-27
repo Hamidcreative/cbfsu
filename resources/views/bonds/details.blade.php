@@ -73,7 +73,7 @@
                                             <p class="mb-0"> Single Project Limit  </p>
                                         </div>
                                         <div class="col-sm-8">
-                                            <p class="text-muted mb-0"> {{$bond_detail->customer->authority->single_job_limit ?? ''}}  </p>
+                                            <p class="text-muted mb-0"> {{amountFormat($bond_detail->customer->authority->single_job_limit)}}  </p>
                                         </div>
                                     </div>
                                     <hr>
@@ -82,7 +82,7 @@
                                             <p class="mb-0">Aggregate Limit  </p>
                                         </div>
                                         <div class="col-sm-8">
-                                            <p class="text-muted mb-0"> {{$bond_detail->customer->authority->aggregate_limit ?? ''}}  </p>
+                                            <p class="text-muted mb-0"> {{amountFormat($bond_detail->customer->authority->aggregate_limit) ?? ''}}  </p>
                                         </div>
                                     </div>
                                     <hr>
@@ -231,7 +231,7 @@
                                             <p class="mb-0"> Liquidated Damages </p>
                                         </div>
                                         <div class="col-sm-8">
-                                            <p class="text-muted mb-0"> {{$bond_detail->damages ?? ''}}  </p>
+                                            <p class="text-muted mb-0"> {{amountFormat($bond_detail->damages) ?? ''}}  </p>
                                         </div>
                                     </div>
                                     <hr>
@@ -240,7 +240,7 @@
                                             <p class="mb-0"> Retainage Amount </p>
                                         </div>
                                         <div class="col-sm-8">
-                                            <p class="text-muted mb-0"> {{$bond_detail->retain_amount ?? ''}}  </p>
+                                            <p class="text-muted mb-0"> {{amountFormat($bond_detail->retain_amount) ?? ''}}  </p>
                                         </div>
                                     </div>
                                     <hr>
@@ -249,7 +249,7 @@
                                             <p class="mb-0"> Current Backlog </p>
                                         </div>
                                         <div class="col-sm-8">
-                                            <p class="text-muted mb-0"> {{$bond_detail->current_backlog ?? ''}}  </p>
+                                            <p class="text-muted mb-0"> {{amountFormat($bond_detail->current_backlog) ?? ''}}  </p>
                                         </div>
                                     </div>
                                     <hr>
@@ -348,7 +348,7 @@
                                             <p class="mb-0"> How Much Will You Bid $  </p>
                                         </div>
                                         <div class="col-sm-8">
-                                            <p class="text-muted mb-0"> {{$bond_detail->bid_amount ?? ''}}  </p>
+                                            <p class="text-muted mb-0"> {{amountFormat($bond_detail->bid_amount) ?? ''}}  </p>
                                         </div>
                                     </div>
                                     <hr>
@@ -357,7 +357,7 @@
                                             <p class="mb-0"> What is Your Project Cost $ </p>
                                         </div>
                                         <div class="col-sm-8">
-                                            <p class="text-muted mb-0"> {{$bond_detail->bid_project_cost ?? ''}}  </p>
+                                            <p class="text-muted mb-0"> {{amountFormat($bond_detail->bid_project_cost) ?? ''}}  </p>
                                         </div>
                                     </div>
                                     <hr>
@@ -489,7 +489,7 @@
                                                 <p class="mb-0"> Contract Amount </p>
                                             </div>
                                             <div class="col-sm-8">
-                                                <p class="text-muted mb-0"> {{$bond_detail->perf_contract_amount ?? ''}}  </p>
+                                                <p class="text-muted mb-0"> {{amountFormat($bond_detail->perf_contract_amount) ?? ''}}  </p>
                                             </div>
                                         </div>
                                         <hr>
@@ -525,7 +525,7 @@
                                                 <p class="mb-0"> Amount </p>
                                             </div>
                                             <div class="col-sm-8">
-                                                <p class="text-muted mb-0"> {{$bond_detail->perf_amount ?? ''}}  </p>
+                                                <p class="text-muted mb-0"> {{amountFormat($bond_detail->perf_amount) ?? ''}}  </p>
                                             </div>
                                         </div>
                                         <hr>

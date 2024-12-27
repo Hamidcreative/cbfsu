@@ -459,3 +459,15 @@ if (!function_exists('bondType')) {
         );
     }
 }
+if (!function_exists('amountFormat')) {
+    function amountFormat($price)
+    {
+        return '$' . number_format($price, 2) ??'';
+    }
+}
+if (!function_exists('amountFormatReverse')) {
+    function amountFormatReverse($price)
+    {
+        return str_replace([',', '$'], '', $price);
+    }
+}

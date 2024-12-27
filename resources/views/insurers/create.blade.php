@@ -51,11 +51,11 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="zip" class="form-label">Zip<span class="req text-danger">*</span></label>
-                                <input type="text" class="form-control" id="zip" name="zip" placeholder="Zip" maxlength="5" pattern="\d{5}"/>
+                                <input type="number" class="form-control zipCode" id="zip" name="zip" placeholder="Zip" maxlength="5" pattern="\d{5}"/>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="zip" class="form-label">Surety Website<span class="req text-danger">*</span></label>
-                                <input type="text" class="form-control" id="zip" name="website" placeholder="Surety Website"/>
+                                <label for="website" class="form-label">Surety Website<span class="req text-danger">*</span></label>
+                                <input type="text" class="form-control" id="website" name="website" placeholder="Surety Website"/>
                             </div>
                         </div>
                     </div>
@@ -103,8 +103,8 @@
                     <div class="card-body">
                         <div class="row mt-2">
                             <div class="col-md-4 mb-3">
-                                <label for="zip" class="form-label">Attorney's-in-Fact<span class="req text-danger">*</span></label>
-                                <input type="text" class="form-control" id="zip" name="attorney" placeholder="Attorney's-in-Fact"/>
+                                <label for="attorney" class="form-label">Attorney's-in-Fact<span class="req text-danger">*</span></label>
+                                <input type="text" class="form-control" id="attorney" name="attorney" placeholder="Attorney's-in-Fact"/>
                             </div>
                         </div>
                     </div>
