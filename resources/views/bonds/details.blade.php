@@ -73,7 +73,7 @@
                                             <p class="mb-0"> Single Project Limit  </p>
                                         </div>
                                         <div class="col-sm-8">
-                                            <p class="text-muted mb-0"> {{amountFormat($bond_detail->customer->authority->single_job_limit)}}  </p>
+                                            <p class="text-muted mb-0"> {{amountFormat($bond_detail->customer->authority->single_job_limit??'')}}  </p>
                                         </div>
                                     </div>
                                     <hr>
