@@ -234,12 +234,12 @@
             <td style="border: 1px solid #ddd; padding: 8px;">  {{$bond->damages ??''}}  </td>
         </tr>
         <tr  >
-            <td style="border: 1px solid #ddd; padding: 8px;"> Retainage Amount </td>
-            <td style="border: 1px solid #ddd; padding: 8px;">  {{$bond->retain_amount ??''}}  </td>
+            <td style="border: 1px solid #ddd; padding: 8px;"> Retainage Amount (%) </td>
+            <td style="border: 1px solid #ddd; padding: 8px;">  {{$bond->retain_amount ??''}} % </td>
         </tr>
         <tr>
             <td style="border: 1px solid #ddd; padding: 8px;"> Current Backlog </td>
-            <td style="border: 1px solid #ddd; padding: 8px;">  {{$bond->current_backlog ??''}}  </td>
+            <td style="border: 1px solid #ddd; padding: 8px;">  {{amountFormat($bond->current_backlog ?? 0)}}  </td>
         </tr>
         <tr  >
             <td style="border: 1px solid #ddd; padding: 8px;"> GPM </td>

@@ -65,15 +65,15 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Liquidated Damages<span class="req text-danger">*</span></label>
-                                    <input type="text" class="form-control monetary"  name="liquidated_damages" placeholder="$0.00" value="{{$obj->damages??''}}"/>
+                                    <input type="text" class="form-control monetary" placeholder="$0.00"  name="liquidated_damages" value="{{$obj->damages??''}}"/>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label class="form-label">Retainage Amount<span class="req text-danger">*</span></label>
-                                    <input type="text" class="form-control monetary"  name="retainage_amount" placeholder="$0.00" value="{{$obj->retain_amount??''}}"/>
+                                    <label class="form-label">Retainage Amount (%) <span class="req text-danger">*</span></label>
+                                    <input type="number" class="form-control"  name="retainage_amount" placeholder="" value="{{$obj->retain_amount??''}}"/>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Current Backlog<span class="req text-danger">*</span></label>
-                                    <input type="text" class="form-control"  name="current_backlog" placeholder="Current Backlog" value="{{$obj->current_backlog??''}}"/>
+                                    <input type="text" class="form-control monetary" placeholder="$0.00"  name="current_backlog"  value="{{$obj->current_backlog??''}}"/>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Engineer Name<span class="req text-danger">*</span></label>
@@ -111,6 +111,10 @@
                                 <div class="col-md-4 form-group">
                                     <label for="owner_address" class="form-label">Oblige/Owner Address<span class="req text-danger">*</span></label>
                                     <input class="form-control" id="address" name="owner_address" value="{{$obj->owner_address??''}}">
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <label for="owner_address" class="form-label">Project Description <span class="req text-danger">*</span></label>
+                                    <textarea class="form-control" id="description" name="project_description" rows="4">{{$obj->job_description??''}}</textarea>
                                 </div>
                             </div>
                         </div>

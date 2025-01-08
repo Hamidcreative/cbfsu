@@ -100,11 +100,17 @@
                                     </div>
 
 
+{{--                                    <div class="col-md-4 mb-3">--}}
+{{--                                        <label for="primary_contact" class="form-label">Primary Contact <span class="req text-danger">*</span></label>--}}
+{{--                                        <input type="text" class="form-control phoneNo" id="primary_contact" name="primary_contact" value="{!! $customer->primary_contact !!}"--}}
+{{--                                               maxlength="12" placeholder="000-000-0000" />--}}
+{{--                                    </div>--}}
                                     <div class="col-md-4 mb-3">
                                         <label for="primary_contact" class="form-label">Primary Contact <span class="req text-danger">*</span></label>
-                                        <input type="text" class="form-control phoneNo" id="primary_contact" name="primary_contact" value="{!! $customer->primary_contact !!}"
-                                               maxlength="12" placeholder="000-000-0000" />
+                                        <input type="text" class="form-control" id="primary_contact" name="primary_contact" value="{!! $customer->primary_contact !!}" />
                                     </div>
+
+
                                     <div class="col-md-4 mb-3">
                                         <label for="phone" class="form-label">Phone <span class="req text-danger">*</span></label>
                                         <input type="text" class="form-control phoneNo" id="phone" name="phone" value="{!! $customer->phone !!}"
