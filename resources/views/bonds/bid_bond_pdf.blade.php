@@ -144,7 +144,7 @@
 
             <td style="vertical-align: top;float: left; width: 50%;">
                 <div>
-                    <span class="line-underline" style="border-bottom: 1px solid black; width: 100%; display: inline-block;">Client Name</span>
+                    <span class="line-underline" style="border-bottom: 1px solid black; width: 100%; display: inline-block;">Client Name:  {!! $bond_data->customer->user->name ?? '' !!}</span>
                 </div>
                 <span style="padding-left:7px; font-size: 11px" > <i>(Witness)</i></span>
 
