@@ -27,8 +27,12 @@ class AuthorityDataTable extends BaseDataTable
             ->eloquent($query)
             ->addColumn('territory_combined', function($obj){
                 $territory = $obj->territory;
-                $territory_unit = territory_units()[$obj->territory_unit];
-                return "{$territory} {$territory_unit}";
+                if($obj->territory_unit){
+                    $territory_unit = territory_units()[$obj->territory_unit];
+                    return "{$territory} {$territory_unit}";
+                }else{
+                    return $territory;
+                }
             })
 
             ->addColumn('job_duration_combined', function($obj){
@@ -39,25 +43,19 @@ class AuthorityDataTable extends BaseDataTable
 
             ->addColumn('warranty_duration_combined', function($obj){
                 $warranty_duration = $obj->warranty_duration;
-                $warranty_duration_unit = days_unit()[$obj->warranty_duration_unit];
+                $warranty_duration_unit = $obj->warranty_duration_unit ? days_unit()[$obj->warranty_duration_unit] : '';
                 return "{$warranty_duration} {$warranty_duration_unit}";
             })
 
             ->addColumn('payment_interval_combined', function($obj){
                 $payment_interval = $obj->payment_interval;
-                $payment_interval_unit = days_unit()[$obj->payment_interval_unit];
+                $payment_interval_unit = $obj->payment_interval_unit ? days_unit()[$obj->payment_interval_unit] :'';
                 return "{$payment_interval} {$payment_interval_unit}";
             })
 
             ->addColumn('maintenance_limit_combined', function($obj){
                 $maintenance_limit = $obj->maintenance_limit;
-                $maintenance_limit_unit = days_unit()[$obj->maintenance_limit_unit];
-                return "{$maintenance_limit} {$maintenance_limit_unit}";
-            })
-
-            ->addColumn('a', function($obj){
-                $maintenance_limit = $obj->maintenance_limit;
-                $maintenance_limit_unit = days_unit()[$obj->maintenance_limit_unit];
+                $maintenance_limit_unit = $obj->maintenance_limit_unit ? days_unit()[$obj->maintenance_limit_unit] : "";
                 return "{$maintenance_limit} {$maintenance_limit_unit}";
             })
             ->addColumn('actions', function($obj){
@@ -69,7 +67,7 @@ class AuthorityDataTable extends BaseDataTable
                 }
 
             })
-            ->rawColumns(['actions','status']);
+            ->rawColumns(['actions']);
     }
 
     /**
@@ -128,13 +126,12 @@ class AuthorityDataTable extends BaseDataTable
             Column::make('expiry_date')->title('Expire Date'),
             Column::make('single_job_limit')->title('Single Job Limit'),
             Column::make('aggregate_limit')->title('Aggregate Limit'),
-            Column::make('territory_combined')->title('Territory'),
+            Column::computed('territory_combined')->title('Territory'),
             Column::make('job_duration_combined')->title('Job Duration'),
             Column::make('warranty_duration_combined')->title('Warranty Duration Limit'),
             Column::make('payment_interval_combined')->title('Payment Interval'),
             Column::make('minimum_bid')->title('Minimum Bid(%)'),
             Column::make('maintenance_limit_combined')->title('Maintenance Limit'),
-
             Column::computed('actions')
                 ->title('Action')
                 ->exportable(true)
@@ -160,10 +157,11 @@ class AuthorityDataTable extends BaseDataTable
         $datas['all'] = 'Select Insurer Name';
         $objs  = Authority::from(TableName(Authority::class).' as at')
         ->join(TableName(Insurer::class).' as ins','at.insurer_id', '=' ,'ins.id')->get();
-        foreach($objs as $obj){
-            $datas[$obj->id]= $obj->name;
+        if($objs){
+            foreach($objs as $obj){
+                $datas[$obj->id]= $obj->name;
+            }
         }
-
         return [
             'name'  => [ 'title' => 'Insurer Name','options' => $datas,'id'=>'role-filter', 'placeholder'=>'Select a Province', 'class' => 'filter-dropdown', 'type' => 'select', 'condition' => 'like', 'active' => true],
         ];

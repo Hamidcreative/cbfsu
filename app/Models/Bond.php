@@ -12,7 +12,7 @@ class Bond extends Model
     protected $table    = 'bonds';
     protected $fillable = [
 
-//        'job_description',
+        'job_description',
 //        'job_location',
 
         'customer_id',

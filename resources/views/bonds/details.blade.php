@@ -237,10 +237,10 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <p class="mb-0"> Retainage Amount </p>
+                                            <p class="mb-0"> Retainage Amount (%)</p>
                                         </div>
                                         <div class="col-sm-8">
-                                            <p class="text-muted mb-0"> {{amountFormat($bond_detail->retain_amount ?? 0)}}  </p>
+                                            <p class="text-muted mb-0"> {{$bond_detail->retain_amount ?? 0}} % </p>
                                         </div>
                                     </div>
                                     <hr>
