@@ -25,11 +25,11 @@ class InsurerDataTable extends BaseDataTable
         $db_connection = env('DB_CONNECTION');
         return datatables()
             ->eloquent($query)
-//            ->addColumn('status', function($obj){
-//                if($obj->status)
-//                    return "<span class='badge bg-success '>Active</span> ";
-//                return "<span class='badge bg-primary '>InActive</span> ";
-//            })
+            ->addColumn('am_best_rating', function($obj){
+                if($obj->am_best_rating)
+                     return am_best_rating()[$obj->am_best_rating];
+                return "<span class='badge bg-primary '></span> ";
+            })
             ->addColumn('actions', function($obj){
                 return view('insurers.actions',compact('obj'));
             })
@@ -101,7 +101,7 @@ class InsurerDataTable extends BaseDataTable
         return [
             Column::make('id'),
             Column::make('name'),
-            Column::make('am_best_rating')->title('AM Best Rating'),
+            Column::computed('am_best_rating')->title('AM Best Rating'),
 //            Column::make('state_name')->title('State'),
             Column::make('city_name')->title('City'),
             Column::make('cbu_name')->title('Contract Bond Underwriter'),

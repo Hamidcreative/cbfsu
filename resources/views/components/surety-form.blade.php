@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-6 mb-3">
         <label for="rating" class="form-label">AM Best Rating<span class="req text-danger">*</span></label>
-        <input type="text" class="form-control" id="rating" name="rating" placeholder="AM Best Rating" value="{{$insurer->am_best_rating}}"/>
+        <input type="text" class="form-control" id="rating" name="rating" placeholder="AM Best Rating" value="{{am_best_rating()[$insurer->am_best_rating??0]}}"/>
     </div>
     <div class="col-md-6 mb-3">
         <label for="treasury_list" class="form-label">Treasury Listed <span class="req text-danger">*</span></label>
