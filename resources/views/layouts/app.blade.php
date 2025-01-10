@@ -272,6 +272,32 @@
             });
         }
 
+		
+		$('body').on('input','.phoneNo', function () {
+        let value = $(this).val().replace(/\D/g, ''); // Remove non-digit characters
+        if (value.length > 3 && value.length <= 6) {
+            value = value.replace(/(\d{3})(\d+)/, '$1-$2');
+        } else if (value.length > 6) {
+            value = value.replace(/(\d{3})(\d{3})(\d+)/, '$1-$2-$3');
+        }
+        $(this).val(value);
+    });
+    $('body').on('input','.zipCode', function () {
+        if (this.value.length > 5) {
+            this.value = this.value.slice(0, 5);
+        }
+    });
+    $('body').on('input','.monetary', function () {
+        let value = $(this).val().replace(/[^0-9.]/g, '');
+        if (value) {
+            let parts = value.split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            value = parts.length > 1 ? parts[0] + '.' + parts[1].substring(0, 2) : parts[0];
+            $(this).val('$' + value);
+        } else {
+            $(this).val(''); // Clear the field if the value is empty
+        }
+    });
     </script>
 @endif
 
