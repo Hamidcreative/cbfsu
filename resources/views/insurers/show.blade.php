@@ -24,7 +24,7 @@
                                             <p class="mb-0">AM Best Rating</p>
                                         </div>
                                         <div class="col-sm-9">
-                                            <p class="text-muted mb-0">{{$insurer->am_best_rating??''}}</p>
+                                            <p class="text-muted mb-0">{{am_best_rating()[$insurer->am_best_rating??0]}}</p>
                                         </div>
                                     </div>
                                     <hr>

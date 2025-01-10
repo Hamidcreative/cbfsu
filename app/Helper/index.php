@@ -135,11 +135,12 @@ if (!function_exists('am_best_rating')) { // added here for easily change in fut
     function am_best_rating(): array
     {
         return array(
-            '1' => '1',
-            '2' => '2',
-            '3' => '3',
-            '4' => '4',
-            '5' => '5',
+            '1' => 'A++',
+            '2' => 'A+',
+            '3' => 'A',
+            '4' => 'A-',
+            '5' => 'B++',
+            '6' => 'B+',
         );
     }
 }

@@ -71,12 +71,12 @@
                         <input type="text" class="form-control"  name="liquidated_damages" placeholder="Liquidated Damages"/>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label class="form-label">Retainage Amount*</label>
+                        <label class="form-label">Retainage Amount (%)*</label>
                         <input type="number" class="form-control"  name="retainage_amount" placeholder="Retainage Amount"/>
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label">Current Backlog*</label>
-                        <input type="text" class="form-control"  name="current_backlog" placeholder="Current Backlog"/>
+                        <input type="text" class="form-control monetary" placeholder="$0.00"  name="current_backlog"/>
                     </div>
 
                     <div class="col-md-4 mb-3">

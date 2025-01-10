@@ -102,10 +102,10 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <p class="mb-0">Retainage Amount</p>
+                                            <p class="mb-0">Retainage Amount (%)</p>
                                         </div>
                                         <div class="col-sm-9">
-                                            <p class="text-muted mb-0">{{$pm['retain_amount']??'N/A'}}</p>
+                                            <p class="text-muted mb-0">{{$pm['retain_amount']??'N/A'}}%</p>
                                         </div>
                                     </div>
                                     <hr>
@@ -114,7 +114,7 @@
                                             <p class="mb-0">Current Backlog</p>
                                         </div>
                                         <div class="col-sm-9">
-                                            <p class="text-muted mb-0">{{$pm['current_backlog']}}</p>
+                                            <p class="text-muted mb-0">{{amountFormat($pm['current_backlog']??0)}}</p>
                                         </div>
                                     </div>
                                     <hr>

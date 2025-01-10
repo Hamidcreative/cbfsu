@@ -74,12 +74,12 @@
                         <input type="text" class="form-control"  name="liquidated_damages" placeholder="Liquidated Damages" value="{!! $pm['liquidated_damages'] !!}"/>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label class="form-label">Retainage Amount*</label>
+                        <label class="form-label">Retainage Amount (%)*</label>
                         <input type="number" class="form-control"  name="retainage_amount" placeholder="Retainage Amount" value="{!! $pm['retain_amount'] !!}"/>
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label">Current Backlog*</label>
-                        <input type="text" class="form-control"  name="current_backlog" placeholder="Current Backlog" value="{!! $pm['current_backlog'] !!}"/>
+                        <input type="text" class="form-control monetary" placeholder="$0.00"  name="current_backlog"  value="{!! $pm['current_backlog'] !!}"/>
                     </div>
 
                     <div class="col-md-4 mb-3">

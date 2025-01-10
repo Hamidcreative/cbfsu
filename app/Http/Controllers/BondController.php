@@ -142,13 +142,13 @@ class BondController extends Controller
                 'warranty_terms'    => $request['warranty_term'],
                 'damages'           => amountFormatReverse($request['liquidated_damages']),
                 'retain_amount'     => amountFormatReverse($request['retainage_amount']),
-                'current_backlog'   => $request['current_backlog'],
+                'current_backlog'   => amountFormatReverse($request['current_backlog']),
                 'engineer_name'     => $request['engineer_name'],
                 'owner_name'     => $request['owner_name'],
                 'owner_zip'      => $request['owner_zip'],
                 'owner_address'  => $request['owner_address'],
                 'owner_bid_date' => $request['owner_bid_date'],
-                'job_description'=> $request['job_description'],
+                'job_description'=> $request['project_description'],
                 'job_location'   => $request['job_location'],
                 'owner_state'    => $request['owner_state'],
                 'owner_city'     => $request['owner_city'],
@@ -390,8 +390,17 @@ class BondController extends Controller
 
         $id      =   mws_encrypt('D',$id);
         $bond_data   =   Bond::where('id',$id)->first();
+        $day='';
+        $month='';
+        $year='';
+        if ($bond_data && $bond_data->owner_bid_date) {
+            $date = \Carbon\Carbon::createFromFormat('Y-m-d', $bond_data->owner_bid_date);
+            $day = $date->format('jS');
+            $month = $date->format('F');
+            $year = $date->format('Y');
+        }
 
-        $pdf = Pdf::loadView('bonds.bid_bond_pdf', compact('bond_data'));
+        $pdf = Pdf::loadView('bonds.bid_bond_pdf', compact('bond_data','day','month','year'));
         return $pdf->stream();
     }
 
