@@ -31,9 +31,11 @@
                         <label for="bond_id" class="form-label">Select Bond (Customer Name- Project Name) <span class="req text-danger"> *</span></label>
                         <select  placeholder="Select Bond" class="form-select select2selector" id="bond_id" name="bond_id">
                             <option value="0"> Select Bond</option>
-                            @foreach($bonds as $item)
-                                <option value="{{$item->id}}">{{$item->customer->user->name}} - {{$item->name}} </option>
-                            @endforeach
+                            @if($bonds)
+                                @foreach($bonds as $item)
+                                    <option value="{{$item->id}}">{{$item->customer->user->name ?? ''}} - {{$item->name}} </option>
+                                @endforeach
+                            @endif
                         </select>
                     </div>
                     <div class="col-md-12 mb-0 mt-3">

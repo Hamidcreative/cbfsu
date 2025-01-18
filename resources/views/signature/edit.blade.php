@@ -20,7 +20,7 @@
                         <select  placeholder="Select Bond" class="form-select select2selector" id="bond_id" name="bond_id">
                             <option value="0"> Select Bond</option>
                             @foreach($bonds as $item)
-                                <option value="{{$item->id}}" @selected($item->id==$signature->bond_id)>{{$item->customer->user->name}} - {{$item->name}} </option>
+                                <option value="{{$item->id}}" @selected($item->id==$signature->bond_id)>{{$item->customer->user->name??''}} - {{$item->name}} </option>
                             @endforeach
                         </select>
                     </div>
