@@ -123,15 +123,14 @@ class SignatureDataTable extends BaseDataTable
 
     public function getFilters(): array
     {
-        $attch  =   [
-            0 => " select Seal/Signature",
-            1 => "Seal",
-            2 => "Signature",
-        ];
+        $attachments['attachments'] = 'select Type';
+        foreach(attachment_types() as $key => $item ){
+            $attachments[$key]= $item;
+        }
         return [
             'id'  => ['title' => 'ID', 'class' => '', 'type' => 'number', 'condition' => 'like', 'active' => true],
             'name'  => ['title' => 'Name', 'class' => '', 'type' => 'text', 'condition' => 'like', 'active' => true],
-            'attachment_type'  => [ 'title' => 'Attachment Type','options' => $attch, 'placeholder'=>'Select an Attachment Type', 'class' => 'filter-dropdown', 'type' => 'select', 'condition' => 'like', 'active' => true],
+            'attachment_type'  => [ 'title' => 'Attachment Type','options' => $attachments, 'placeholder'=>'Select an Attachment Type', 'class' => 'filter-dropdown', 'type' => 'select', 'condition' => 'like', 'active' => true],
         ];
     }
 }
