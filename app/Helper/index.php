@@ -491,3 +491,7 @@ if (!function_exists('amountFormatReverse')) {
         return str_replace([',', '$'], '', $price);
     }
 }
+
+//Manage Seals/Signatures
+//
+//Added
