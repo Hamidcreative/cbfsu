@@ -11,28 +11,37 @@
                             <div class="card mb-2">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-sm-3">
+                                        <div class="col-md-4">
                                             <p class="mb-0">Name</p>
                                         </div>
-                                        <div class="col-sm-9">
+                                        <div class="col-md-8">
                                             <p class="text-muted mb-0">{{$signature->name}}</p>
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row">
-                                        <div class="col-sm-3">
-                                            <p class="mb-0">Attachment Type</p>
+                                        <div class="col-md-4">
+                                            <p class="mb-0"> Bond (Customer - Project) </p>
                                         </div>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">{{$signature->attachment_type == 1 ? "Seal" : "Signature" }}</p>
+                                        <div class="col-md-8">
+                                            <p class="text-muted mb-0">{{$bond->customer->user->name ?? ''}} - {{$bond->name ?? ''}}</p>
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row">
-                                        <div class="col-sm-3">
+                                        <div class="col-md-4">
+                                            <p class="mb-0">Attachment Type</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="text-muted mb-0">{{ attachment_types()[$signature->attachment_type] }}</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-4">
                                             <p class="mb-0">Attachment</p>
                                         </div>
-                                        <div class="col-sm-9">
+                                        <div class="col-md-8">
                                             @if(isset($signature->attachment))
                                                 @if(pathinfo($signature->attachment, PATHINFO_EXTENSION) === 'pdf')
                                                     <!-- Display a PDF icon and a link to the PDF -->

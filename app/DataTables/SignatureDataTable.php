@@ -24,14 +24,15 @@ class SignatureDataTable extends BaseDataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('attachment_type', function($signature){
-                if($signature->attachment_type == 1){
-                    return "Seal";
-                }else{
-                    return "Signature";
-                }
+                return attachment_types()[$signature->attachment_type];
             })
             ->addColumn('attachment', function($signature){
                 return "<a href='" . asset('images/bonds/'.$signature->attachment) . "'><span class='badge bg-primary '>View </span></a>";
+            })
+            ->addColumn('bond_id', function($signature){
+                $customer = $signature->bond->customer->user->name ?? "";
+                $bond = $signature->bond_id > 0  ? $signature->bond->name : '';
+                return $customer .'-'.$bond;
             })
             ->addColumn('actions', function($signature){
                 return view('signature.actions', compact('signature'));
@@ -99,7 +100,8 @@ class SignatureDataTable extends BaseDataTable
             Column::make('id')->title('ID'),
             Column::computed('name'),
             Column::make('attachment_type'),
-            Column::make('attachment')->title('View Seal/Signature'),
+            Column::make('attachment')->title('View Attachment'),
+            Column::computed('bond_id')->title('Bond'),
             Column::computed('actions')
                 ->title('Action')
                 ->exportable(true)

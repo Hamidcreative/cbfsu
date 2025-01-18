@@ -21,6 +21,8 @@ return array(
     'convert_entities' => true,
 
     'options' => array(
+        'isRemoteEnabled' => true,
+        'isHtml5ParserEnabled' => true,
         /**
          * The location of the DOMPDF font directory
          *

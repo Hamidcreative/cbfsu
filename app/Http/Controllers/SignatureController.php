@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\SignatureDataTable;
+use App\Models\Bond;
 use App\Models\Signature;
 use App\Traits\FileUploadTrait;
 use Illuminate\Http\Request;
@@ -15,21 +16,24 @@ class SignatureController extends Controller
     }
 
     public function create(){
-        return view('signature.create');
+        $bonds = Bond::get();
+        return view('signature.create',compact('bonds'));
     }
 
     public function store(Request $request){
         $request->validate([
-            'name'  =>  'required',
+            'name'             =>  'required',
             'attachment_type'  =>  'required|gt:0',
-            'attachment'  =>  'required'
-
+            'attachment'       =>  'required',
+            'bond_id'          =>  'required|gt:0',
         ],
         [
-            'attachment_type'   =>  'The attachment type field is required.',
+            'attachment_type'  =>  'The attachment type field is required.',
+            'bond_id.gt'       =>  'The Bond field is required.',
         ]);
         $data   =   [
-            'name'  =>  $request['name'],
+            'name'             =>  $request['name'],
+            'bond_id'          =>  $request['bond_id'],
             'attachment_type'  =>  $request['attachment_type'],
         ];
         if($request->has('attachment') && gettype($request->attachment)=="object")
@@ -49,25 +53,28 @@ class SignatureController extends Controller
         ]);
     }
     public function edit($id){
-        $d_id   =   mws_encrypt('D',$id);
+        $d_id       =   mws_encrypt('D',$id);
         $signature  =   Signature::where('id',$d_id)->first();
-        return view('signature.edit',compact('signature'));
+        $bonds      =   Bond::get();
+        return view('signature.edit',compact('signature','bonds'));
     }
 
     public function update(Request $request){
         $request->validate([
-            'name'  =>  'required',
+            'name'             =>  'required',
             'attachment_type'  =>  'required|gt:0',
-            'attachment'  =>  'required'
-
+            'attachment'       =>  'required',
+            'bond_id'          =>  'required|gt:0',
         ],
-            [
-                'attachment_type'   =>  'The attachment type field is required.',
-            ]);
+        [
+            'attachment_type'  =>  'The attachment type field is required.',
+            'bond_id.gt'       =>  'The Bond field is required.',
+        ]);
 
         $data   =   [
             'name'             =>  $request['name'],
             'attachment_type'  =>  $request['attachment_type'],
+            'bond_id'          =>  $request['bond_id'],
         ];
         if($request->has('attachment') && gettype($request->attachment)=="object")
         {
@@ -89,9 +96,10 @@ class SignatureController extends Controller
 
     public function detail($id)
     {
-        $d_id   =   mws_encrypt('D',$id);
+        $d_id       =   mws_encrypt('D',$id);
         $signature  =   Signature::where('id',$d_id)->first();
-        return view('signature.detail',compact('signature'));
+        $bond       =   Bond::where('id',$signature->bond_id)->first();
+        return view('signature.detail',compact('signature','bond'));
     }
 
     public function destroy($id){

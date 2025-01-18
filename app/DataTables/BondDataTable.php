@@ -50,11 +50,7 @@ class BondDataTable extends BaseDataTable
                 if($community->bond_type)
                     return bondType()[$community->bond_type]; // Call the bondStatus() function
                 return bondType()[0];
-
-
-
             })
-
             ->addColumn('actions', function($obj){
                 $user = Auth::user();
                 $role = $user->role;

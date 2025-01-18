@@ -129,8 +129,21 @@ if (!function_exists('corporation_types')) {
             '5' => 'C-Corp',
         );
     }
-
 }
+if (!function_exists('attachment_types')) {
+    function attachment_types()
+    {
+        return array(
+            '1' => 'Bond Seal',
+            '2' => 'Other Seal',
+            '3' => 'Signature',
+            '4' => 'Attorney-in-Fact Signature',
+            '5' => 'Witness Signature',
+        );
+    }
+}
+
+
 if (!function_exists('am_best_rating')) { // added here for easily change in future
     function am_best_rating(): array
     {
