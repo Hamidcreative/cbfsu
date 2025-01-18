@@ -476,7 +476,13 @@ if (!function_exists('bondType')) {
 if (!function_exists('amountFormat')) {
     function amountFormat($price)
     {
-        return '$' . number_format($price, 2) ??'';
+        $price = $price ?? 0; // Ensure $price is not null
+        if (is_numeric($price)) {
+            return '$' . number_format($price, 2);
+        } else {
+            return '';
+        }
+
     }
 }
 if (!function_exists('amountFormatReverse')) {
