@@ -11,21 +11,32 @@
                     <input type="hidden" class="form-control" placeholder="Name"  value="{!! $signature->id !!}" name="id">
 
                     <div class="col-md-12 mb-3">
-                        <label for="name" class="form-label">Name*</label>
+                        <label for="name" class="form-label">Name<span class="req text-danger"> *</span></label>
                         <input type="text" class="form-control" placeholder="Name" id="name" value="{!! $signature->name !!}" name="name">
                     </div>
 
                     <div class="col-md-12 mb-0">
-                        <label for="role" class="form-label">Attachment Type*</label>
-                        <select  placeholder="Select Attachment Type" class="form-select" id="role" name="attachment_type">
+                        <label for="bond_id" class="form-label">Select Bond (Customer Name- Project Name) <span class="req text-danger"> *</span></label>
+                        <select  placeholder="Select Bond" class="form-select select2selector" id="bond_id" name="bond_id">
+                            <option value="0"> Select Bond</option>
+                            @foreach($bonds as $item)
+                                <option value="{{$item->id}}" @selected($item->id==$signature->bond_id)>{{$item->customer->user->name}} - {{$item->name}} </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-md-12 mb-0 mt-3">
+                        <label for="attachment_type" class="form-label">Attachment Type<span class="req text-danger"> *</span></label>
+                        <select  placeholder="Select Attachment Type" class="form-select select2selector" id="attachment_type" name="attachment_type">
                             <option value="0"> Select Attachment Type</option>
-                            <option value="1" @selected($signature->attachment_type == 1)> Seal</option>
-                            <option value="2" @selected($signature->attachment_type == 2)> Signature</option>
+                            @foreach(attachment_types() as $key => $item)
+                                <option value="{{$key}}" @selected($key==$signature->attachment_type)>{{$item}}</option>
+                            @endforeach
                         </select>
                     </div>
 
                     <div class="col-md-12 mt-3">
-                        <label for="file" class="form-label">Attachment*</label>
+                        <label for="file" class="form-label">Attachment<span class="req text-danger"> *</span></label>
                         <input type="file" class="form-control" id="file" name="attachment" value="{!! $signature->attachment !!}" placeholder=""/>
                         <div class="mt-3">
                             @if(isset($signature->attachment))
@@ -55,7 +66,7 @@
     </x-slot>
 </x-custom-modal-component>
 <script type="module">
-    $(document).find('#role').select2(
+    $(document).find('.select2selector').select2(
         {
             dropdownParent: $('#default_modal'),
         });

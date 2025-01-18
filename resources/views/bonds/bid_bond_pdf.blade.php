@@ -131,20 +131,29 @@
     <table style="width: 100%;">
         <tr>
             <td style="vertical-align: top; width: 40%; position: relative;">
-                <div>
-                    <span class="line-underline" style="border-bottom: 1px solid black; width: 80%; display: inline-block;">&nbsp;</span>
-                </div>
+                @if($witness1)
+                    <div style="width: 100px; height: 100px; margin-bottom: -50px">
+                        <img src="{!! public_path('/images/bonds/'.$witness1) !!}"  style="max-width: 100%; max-height: 100%; object-fit: contain; display: block">
+                    </div>
+                @endif
+                <span class="line-underline" style="border-bottom: 1px solid black; width: 80%; display: inline-block;">&nbsp;</span>
                 <span style="padding-left:7px; font-size: 11px" > <i>(Witness)</i></span>
 
-                <div style="margin-top: 50px">
+
+                @if($witness1)
+                    <div style="width: 100px; height: 100px;margin-top: 30px; margin-bottom: -50px">
+                        <img src="{!! public_path('/images/bonds/'.$witness2) !!}" style="max-width: 100%; max-height: 100%; object-fit: contain; display: block">
+                    </div>
+                @endif
+                <div style="margin-top: 0px">
                     <span class="line-underline" style="border-bottom: 1px solid black; width: 80%; display: inline-block;">&nbsp;</span>
                 </div>
                 <span style="padding-left:7px; font-size: 11px" > <i>(Witness)</i></span>
             </td>
 
-            <td style="vertical-align: top;float: left; width: 50%;">
+            <td style="float: left; width: 50%;">
                 <div>
-                    <span class="line-underline" style="border-bottom: 1px solid black; width: 100%; display: inline-block;">Client Name:  {!! $bond_data->customer->user->name ?? '' !!}</span>
+                    <span class="line-underline" style="border-bottom: 1px solid black; width: 100%; display: inline-block;margin-top: 45px">Client Name:  {!! $bond_data->customer->user->name ?? '' !!}</span>
                 </div>
                 <span style="padding-left:7px; font-size: 11px" > <i>(Witness)</i></span>
 
@@ -154,18 +163,23 @@
                 <span style="padding-left:7px; font-size: 11px" > <i>(Title)</i></span>
 
                 <div style="padding-top: 20px">
-                    <span class="line-underline" style="border-bottom: 1px solid black; width: 100%; display: inline-block;">Liberty Mutual Insurance Company</span>
+                    <span class="line-underline" style="border-bottom: 1px solid black; width: 100%; display: inline-block;">  {!! $bond_data->customer->authority->surerty->name ?? '' !!} </span>
                 </div>
                 <span style="padding-left:7px; font-size: 11px" > <i>(Surety)</i></span>
 
-                <div style="padding-top: 20px">
+                @if($attorney)
+                    <div style="width: 100px; height: 100px;margin-top: 30px; margin-bottom: -50px">
+                        <img src="{!! public_path('/images/bonds/'.$attorney) !!}" style="max-width: 100%; max-height: 100%; object-fit: contain; display: block">
+                    </div>
+                @endif
+                <div style="">
                     <span class="line-underline" style="border-bottom: 1px solid black; width: 100%; display: inline-block;">&nbsp;</span>
                 </div>
                 <span style="padding-left:7px; font-size: 11px" >AIF Name Field Attorney-in-Fact</span>
             </td>
             <td style="vertical-align: top; width: 10%;">
-                <div style="width: 50px; height: 50px; float: right; ">
-                    <img src="{!! public_path('/images/bid_bond/bond_stamp.png') !!}" style="max-width: 130%; max-height: 120%; object-fit: contain; display: block; padding-top: 200%">
+                <div style="width: 100px; height: 100px; float: right; ">
+                    <img src="{!! public_path('/images/bonds/'.$bondSeal) !!}"   style="max-width: 100%; max-height: 100%; object-fit: contain; display: block; padding-top: 30%">
                 </div>
             </td>
         </tr>

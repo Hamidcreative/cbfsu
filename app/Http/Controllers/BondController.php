@@ -11,6 +11,7 @@ use App\Models\Customer;
 use App\Models\City;
 use App\Models\Province;
 use App\Models\Questions;
+use App\Models\Signature;
 use App\Models\SubContractor;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -37,12 +38,9 @@ class BondController extends Controller
 
     public function create()
     {
-
         $provinces = Province::select('id','name')->where('status',true)->orderBY('name')->get();
         $cities  = City::select('id','name')->where('status',true)->orderBY('name')->get();
-
         $route = 'bond.create';
-
 
         $user = Auth::user();
         $role = $user->role;
@@ -144,15 +142,15 @@ class BondController extends Controller
                 'retain_amount'     => amountFormatReverse($request['retainage_amount']),
                 'current_backlog'   => amountFormatReverse($request['current_backlog']),
                 'engineer_name'     => $request['engineer_name'],
-                'owner_name'     => $request['owner_name'],
-                'owner_zip'      => $request['owner_zip'],
-                'owner_address'  => $request['owner_address'],
-                'owner_bid_date' => $request['owner_bid_date'],
-                'job_description'=> $request['project_description'],
-                'job_location'   => $request['job_location'],
-                'owner_state'    => $request['owner_state'],
-                'owner_city'     => $request['owner_city'],
-                'bond_type'      => 0,
+                'owner_name'        => $request['owner_name'],
+                'owner_zip'         => $request['owner_zip'],
+                'owner_address'     => $request['owner_address'],
+                'owner_bid_date'    => $request['owner_bid_date'],
+                'job_description'   => $request['project_description'],
+                'job_location'      => $request['job_location'],
+                'owner_state'       => $request['owner_state'],
+                'owner_city'        => $request['owner_city'],
+                'bond_type'         => 0,
             ];
             $general_data=[
                 'customer_id' => $request['customer_id'],
@@ -388,11 +386,28 @@ class BondController extends Controller
 
     public function viewBidBondPdf($id){
 
-        $id      =   mws_encrypt('D',$id);
-        $bond_data   =   Bond::where('id',$id)->first();
-        $day='';
-        $month='';
-        $year='';
+        $id           =   mws_encrypt('D',$id);
+        $bond_data    =   Bond::where('id',$id)->first();
+        $day = $month = $year  = $attorney = $bondSeal =  null;
+        $witnesses=[];
+
+        $signatures   =   Signature::where(['bond_id'=>$bond_data->id])->get();
+        if($signatures){
+            foreach ($signatures as $index => $sig) {
+                if ($sig->attachment_type == 5) {
+                    $witnesses[] = $sig->attachment;
+                }
+                if($sig->attachment_type == 4){
+                    $attorney = $sig->attachment;
+                }
+                if($sig->attachment_type == 1){
+                    $bondSeal = $sig->attachment;
+                }
+
+            }
+        }
+        $witness1 = $witnesses[0] ?? null;
+        $witness2 = $witnesses[1] ?? null;
         if ($bond_data && $bond_data->owner_bid_date) {
             $date = \Carbon\Carbon::createFromFormat('Y-m-d', $bond_data->owner_bid_date);
             $day = $date->format('jS');
@@ -400,7 +415,16 @@ class BondController extends Controller
             $year = $date->format('Y');
         }
 
-        $pdf = Pdf::loadView('bonds.bid_bond_pdf', compact('bond_data','day','month','year'));
+        $pdf = Pdf::loadView('bonds.bid_bond_pdf', compact(
+            'bond_data',
+            'day',
+            'month',
+            'year',
+            'witness1',
+            'witness2',
+            'attorney',
+            'bondSeal',
+        ));
         return $pdf->stream();
     }
 
