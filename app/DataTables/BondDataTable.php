@@ -131,7 +131,8 @@ class BondDataTable extends BaseDataTable
     {
         return [
             Column::make('id'),
-            Column::make('company_name')->title('Company Name'),
+            Column::make('company_name')->title('Company'),
+            Column::make('name')->title('Project'),
             Column::make('owner_name')->title('Oblige/Owner Name'),
             Column::make('owner_bid_date')->title('Bid Date'),
             Column::make('bid_amount')->title('Bid Amount'),
