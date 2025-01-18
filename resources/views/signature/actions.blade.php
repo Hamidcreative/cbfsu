@@ -1,12 +1,11 @@
 <x-crm-dropdown>
     @if(isPermission('signature.edit'))
         <li>
-            <a class="dropdown-item modal_open" size="md" url="{!! route('signature.edit',mws_encrypt('E',$signature->id)) !!}"><i
+            <a class="dropdown-item modal_open" size="lg" url="{!! route('signature.edit',mws_encrypt('E',$signature->id)) !!}"><i
                         class="bi bi-pencil-square"></i>
                 Edit</a>
         </li>
     @endif
-
     @if(isPermission('signature.view'))
         <li>
             <a class="dropdown-item modal_open" size="lg" url="{!! route('signature.view',mws_encrypt('E',$signature->id)) !!}"><i
@@ -14,7 +13,6 @@
                 View</a>
         </li>
     @endif
-
     @if(isPermission('signature.delete'))
         <li>
             <a

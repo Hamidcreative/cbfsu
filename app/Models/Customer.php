@@ -43,7 +43,7 @@ class Customer extends Model
     public function city(){
         return $this->belongsTo(City::class,'city_id');
     }
-    public function surerty(){
+    public function surety(){
         return $this->hasOne(Insurer::class,'user_id');
     }
     public function authority(){

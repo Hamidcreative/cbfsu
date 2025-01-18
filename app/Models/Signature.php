@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Signature extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','attachment_type','attachment'];
     protected $table = 'signatures';
+    protected $fillable = [
+        'name',
+        'attachment_type',
+        'attachment',
+        'bond_id',
+    ];
+     public function bond(){
+         return $this->belongsTo(Bond::class,'bond_id');
+     }
 }
