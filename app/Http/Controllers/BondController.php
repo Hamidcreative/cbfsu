@@ -384,49 +384,67 @@ class BondController extends Controller
         return view('components.subcontractor',compact('itemNo','contractor'));
     }
 
-    public function viewBidBondPdf($id){
+   public function viewBidBondPdf($id)
+{
+    $id = mws_encrypt('D', $id);
+    $bond_data = Bond::where('id', $id)->first();
+    $day = $month = $year = $attorney = $bondSeal = null;
+    $witnesses = [];
 
-        $id           =   mws_encrypt('D',$id);
-        $bond_data    =   Bond::where('id',$id)->first();
-        $day = $month = $year  = $attorney = $bondSeal =  null;
-        $witnesses=[];
+    $signatures = Signature::where(['bond_id' => $bond_data->id])->get();
 
-        $signatures   =   Signature::where(['bond_id'=>$bond_data->id])->get();
-        if($signatures){
-            foreach ($signatures as $index => $sig) {
+    if ($signatures) {
+        foreach ($signatures as $index => $sig) {
+            if (!empty($sig->attachment) && is_file($sig->attachment)) {
                 if ($sig->attachment_type == 5) {
                     $witnesses[] = $sig->attachment;
                 }
-                if($sig->attachment_type == 4){
+                if ($sig->attachment_type == 4) {
                     $attorney = $sig->attachment;
                 }
-                if($sig->attachment_type == 1){
+                if ($sig->attachment_type == 1) {
                     $bondSeal = $sig->attachment;
                 }
-
+            } else {
+                \Log::warning('Invalid attachment detected', ['attachment' => $sig->attachment]);
             }
         }
-        $witness1 = $witnesses[0] ?? null;
-        $witness2 = $witnesses[1] ?? null;
-        if ($bond_data && $bond_data->owner_bid_date) {
-            $date = \Carbon\Carbon::createFromFormat('Y-m-d', $bond_data->owner_bid_date);
-            $day = $date->format('jS');
-            $month = $date->format('F');
-            $year = $date->format('Y');
-        }
-
-        $pdf = Pdf::loadView('bonds.bid_bond_pdf', compact(
-            'bond_data',
-            'day',
-            'month',
-            'year',
-            'witness1',
-            'witness2',
-            'attorney',
-            'bondSeal',
-        ));
-        return $pdf->stream();
     }
+
+    $witness1 = isset($witnesses[0]) && is_file($witnesses[0]) ? $witnesses[0] : null;
+    $witness2 = isset($witnesses[1]) && is_file($witnesses[1]) ? $witnesses[1] : null;
+    $attorney = is_file($attorney) ? $attorney : null;
+    $bondSeal = is_file($bondSeal) ? $bondSeal : null;
+
+    if ($bond_data && $bond_data->owner_bid_date) {
+        $date = \Carbon\Carbon::createFromFormat('Y-m-d', $bond_data->owner_bid_date);
+        $day = $date->format('jS');
+        $month = $date->format('F');
+        $year = $date->format('Y');
+    }
+
+    // Use a placeholder for invalid attachments
+    $placeholderImage = public_path('images/signatureRequired.png');
+
+    $witness1 = $witness1 ?? $placeholderImage;
+    $witness2 = $witness2 ?? $placeholderImage;
+    $attorney = $attorney ?? $placeholderImage;
+    $bondSeal = $bondSeal ?? $placeholderImage;
+
+    // Generate the PDF
+    $pdf = Pdf::loadView('bonds.bid_bond_pdf', compact(
+        'bond_data',
+        'day',
+        'month',
+        'year',
+        'witness1',
+        'witness2',
+        'attorney',
+        'bondSeal'
+    ));
+
+    return $pdf->stream();
+}
 
     public function viewAttorneyPdf($id)
     {
